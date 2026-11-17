@@ -34,9 +34,10 @@ def seed_for(*k):
 
 # ------------------------------------------------------------------ row builder
 def chip_rows(base, X, irr, bg_fn, glare, cams, lam, a_list, refl_cases, E_list, rng,
-              tilt=0.0, mode="specular", rho_max_um=None, keep_pts=False):
+              tilt=0.0, mode="specular", rho_max_um=None, keep_pts=False, j=None):
     """Rows for one chip geometry. X = Stage-2 exits (None = no tissue in the path)."""
     To = 1.0 - glare
+    j = J if j is None else j
     rows, pts = [], {}
     for cam_name in cams:
         cam = C.CAMERAS[cam_name]
@@ -46,10 +47,10 @@ def chip_rows(base, X, irr, bg_fn, glare, cams, lam, a_list, refl_cases, E_list,
             w, xb, yb = np.ones(1), np.zeros(1), np.zeros(1)
             irr_j = 1.0
         else:
-            w, xb, yb = A.collected(X, NA, J)
+            w, xb, yb = A.collected(X, NA, j)
             Cna = w.sum() / X["N"]
-            irr_j = float(irr[J])
-        bgd = bg_fn(NA) * To * To + glare
+            irr_j = float(irr[j])
+        bgd = bg_fn(NA, j) * To * To + glare
         sig = A.diffraction_sigma_um(lam, NA)
         for a in a_list:
             img = A.Image(w, xb * 1000.0, yb * 1000.0, a, tilt, sig, rng)
@@ -63,7 +64,7 @@ def chip_rows(base, X, irr, bg_fn, glare, cams, lam, a_list, refl_cases, E_list,
                     K = A.electrons_per_um2_per_frame(E, lam, cam["fps"])
                     r = A.snr_cycle(cam, K, sig_frac, Ron, Roff, EE, peak, bgd, rho_max_um=rho_max_um)
                     cyc = A.cycles_to(r["snr1"])
-                    rows.append(dict(base, cam=cam_name, NA=NA, spot_um=a, refl=rc, irradiance=E,
+                    rows.append(dict(base, cam=cam_name, NA=NA, spot_um=a, refl=rc, irradiance=E, mua=C.MUA_PER_MM[j],
                                      tilt=tilt, mode=mode, irr=irr_j, C_NA=Cna, sig_frac_um2=sig_frac,
                                      bg_dens=bgd, img_r50_um=img.quantile(0.5), img_r90_um=img.quantile(0.9),
                                      K=K, blink_hz=cam["blink_hz"], t_snr5_s=cyc / cam["blink_hz"], **r))
@@ -89,7 +90,7 @@ def slab_job(args):
         side = "above" if place == "A_top" else "below"
         base = dict(geometry="slab", placement=place, D_mm=C.SLAB_THICKNESS_MM, depth_um=0,
                     wavelength_nm=lam, musp_780=mu, seed=seed)
-        r, p = chip_rows(base, None, None, lambda NA, s=s1[place]: A.slab_bg(s, NA, J), GLARE[side],
+        r, p = chip_rows(base, None, None, lambda NA, jj=J, s=s1[place]: A.slab_bg(s, NA, jj), GLARE[side],
                          cams, lam, C.SPOT_SIZES_UM, list(C.REFLECTANCE_CASES), C.IRRADIANCE_MW_CM2,
                          rng, keep_pts=keep)
         rows += r; pts.update({(place, 0) + k: v for k, v in p.items()})
@@ -98,7 +99,7 @@ def slab_job(args):
         base = dict(geometry="slab", placement="C_embedded", D_mm=C.SLAB_THICKNESS_MM, depth_um=d,
                     wavelength_nm=lam, musp_780=mu, seed=seed,
                     point_r50_surface_um=_wq(np.hypot(X["x"], X["y"]) * 1000, X["w"][J], 0.5))
-        r, p = chip_rows(base, X, X["irr"], lambda NA: A.slab_bg(s1["C_embedded"], NA, J), GLARE["above"],
+        r, p = chip_rows(base, X, X["irr"], lambda NA, jj=J: A.slab_bg(s1["C_embedded"], NA, jj), GLARE["above"],
                          cams, lam, C.SPOT_SIZES_UM, list(C.REFLECTANCE_CASES), C.IRRADIANCE_MW_CM2,
                          rng, keep_pts=keep)
         rows += r; pts.update({("C_embedded", d) + kk: v for kk, v in p.items()})
@@ -128,7 +129,7 @@ def tilt_job(args):
         X = S2.stage2_slab(slab, d / 1000, s1, 0, C.N2_TILT // F, seed_for(22, di, seed, ti), tilt, mode)
         base = dict(geometry="slab", placement="C_embedded", D_mm=C.SLAB_THICKNESS_MM, depth_um=d,
                     wavelength_nm=lam, musp_780=mu, seed=seed)
-        r, _ = chip_rows(base, X, X["irr"], lambda NA: A.slab_bg(s1, NA, J), GLARE["above"], cams, lam,
+        r, _ = chip_rows(base, X, X["irr"], lambda NA, jj=J: A.slab_bg(s1, NA, jj), GLARE["above"], cams, lam,
                          [100], [C.HEADLINE_REFLECTANCE], [C.IRRADIANCE_BASELINE], rng, tilt=tilt, mode=mode)
         rows += r
     return dict(rows=rows, sec=time.time() - t0, tag=f"tilt d={d} seed={seed}")
@@ -145,7 +146,7 @@ def surface_tilt_rows():
         for mode in ("specular", "lambert"):
             base = dict(geometry="slab", placement="B_under", D_mm=C.SLAB_THICKNESS_MM, depth_um=0,
                         wavelength_nm=lam, musp_780=mu, seed=1)
-            r, _ = chip_rows(base, None, None, lambda NA: A.slab_bg(s1, NA, J), GLARE["below"],
+            r, _ = chip_rows(base, None, None, lambda NA, jj=J: A.slab_bg(s1, NA, jj), GLARE["below"],
                              list(C.CAMERAS), lam, C.SPOT_SIZES_UM, [C.HEADLINE_REFLECTANCE],
                              [C.IRRADIANCE_BASELINE], rng, tilt=tilt, mode=mode)
             rows += r
@@ -167,7 +168,7 @@ def sphere_job(args):
     for side in ("above", "below"):
         base = dict(geometry="sphere", placement="surface", side=side, D_mm=D, depth_um=0,
                     wavelength_nm=lam, musp_780=mu, seed=seed)
-        r, _ = chip_rows(base, None, None, lambda NA: A.sphere_bg(s1, 0.0, NA, J), GLARE[side], cams, lam,
+        r, _ = chip_rows(base, None, None, lambda NA, jj=J: A.sphere_bg(s1, 0.0, NA, jj), GLARE[side], cams, lam,
                          C.SPOT_SIZES_UM, [C.HEADLINE_REFLECTANCE], [C.IRRADIANCE_BASELINE], rng,
                          rho_max_um=R * 1000)
         rows += r
@@ -176,7 +177,7 @@ def sphere_job(args):
         for side in ("above", "below"):
             base = dict(geometry="sphere", placement=name, side=side, D_mm=D, depth_um=round(d * 1000),
                         wavelength_nm=lam, musp_780=mu, seed=seed, F_down_sphere=float(s1["F_down"][J, k]))
-            r, _ = chip_rows(base, X, X["irr"], lambda NA, d=d: A.sphere_bg(s1, d, NA, J), GLARE[side], cams,
+            r, _ = chip_rows(base, X, X["irr"], lambda NA, jj=J, d=d: A.sphere_bg(s1, d, NA, jj), GLARE[side], cams,
                              lam, C.SPOT_SIZES_UM, [C.HEADLINE_REFLECTANCE], [C.IRRADIANCE_BASELINE], rng,
                              rho_max_um=R * 1000)
             rows += r

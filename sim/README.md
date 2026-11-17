@@ -3,7 +3,8 @@
 A Monte Carlo light-transport model that asks whether a camera can read a blinking SPOT chip on, under or inside an organoid, and how deep the chip can be.
 
 - Round 1 verdict: `results/SUMMARY.md` (flat slab, microscope-like optics).
-- Round 2 verdict: `results/v2/SUMMARY_V2.md` (whole-plate optics, spheres, chip tilt, a working decoder, light dose, the paper's measured ΔR). Round 2 is described at the end of this file.
+- Round 2 verdict: `results/v2/SUMMARY_V2.md` (whole-plate optics, spheres, chip tilt, a working decoder, light dose, the paper's measured ΔR).
+- Round 3 verdict (final, supersedes round 2's claims): `results/v3/SUMMARY_V3.md`, covering the headline at 635 nm, random orientation, flatness and a sensitivity ranking. Rounds 2 and 3 are described at the end of this file.
 
 ## Run
 
@@ -92,3 +93,29 @@ Round-2 simplifications:
 - tilt is about one axis only
 - ideal telecentric optics
 - the time-domain model covers only the listed noise sources (no biological or chip-electrical noise near the blink frequency)
+
+## Round 3 (`run_v3.py`, outputs in `results/v3/`)
+
+```
+python run_v3.py             # all checks, Monte Carlo at 635/780/850 nm, tables, pitch assets (~10 min on 16 cores)
+python run_v3.py --quick     # smoke test (~2 min)
+python make_tables_v3.py     # rebuild tables_v3.md from results/v3/mc_v3.pkl
+python assets_v3.py          # rebuild the chart and decoder GIF
+```
+
+Round 3 adds no new physics. It reruns the round-2 slab and sphere models with these additions:
+- 635 nm, where the paper measured ΔR, becomes the headline wavelength.
+- 850 nm is added.
+- Two reflectance cases model a smaller swing at 780 and 850 nm: 50% and 25% of the 635 nm swing, at the same mean R.
+- The centre chip is simulated at tilts 0–180° (`stages_v2.launch`).
+- μa variants are added for the sensitivity ranking.
+
+The read rule is the one calibrated in round 2 on the decoder (`results/v2/decoder_*.csv`).
+
+Round-3 post-processing (`make_tables_v3.py`):
+- **Random orientation.** cos(tilt) is uniform. log(SNR) is interpolated between the simulated tilts, and 20,000 sampled orientations give the read-time distribution.
+- **Flatness.** h_max = side × tan(tilt limit). The tilt limits come from round 2's no-tissue tilt runs.
+- **Landing fixes.** These are face and tilt bookkeeping only.
+- **Sensitivity ranking.** Each uncertain input is varied over its range. Extra noise at the blink frequency is added to the SNR as an apparent modulation of RMS m_n/√T.
+
+`assets_v3.py` uses matplotlib and Pillow, only for the two pitch assets. Both assets are labelled as simulation or synthetic data.

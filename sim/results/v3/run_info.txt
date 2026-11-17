@@ -1,0 +1,10 @@
+total_seconds 770
+quick False
+N1_slab 1000000
+N2_slab 600000
+N1_sphere 600000
+N2_sphere 300000
+N2_tilt_sphere 200000
+seeds [1, 2, 3]
+orientations 20000
+workers 15

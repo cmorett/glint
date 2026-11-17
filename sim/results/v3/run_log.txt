@@ -1,0 +1,276 @@
+[PASS] MCML benchmark [mcml] Rd=0.09772 (ref 0.09734, err 0.39%), Tt=0.66065 (ref 0.66096, err 0.05%), N=400000
+[PASS] MCML benchmark [mbl] Rd=0.09721 (ref 0.09734, err 0.13%), Tt=0.66107 (ref 0.66096, err 0.02%), N=400000
+[PASS] Zero scattering: signal F*C MC=0.606264 analytic=0.606265 (err 0.000%); matched-index F_down MC=0.77880078 vs exp(-mua d)=0.77880078
+[PASS] Energy [mcml] r_sp+R+T+A = 0.00022+0.45968+0.45644+0.08366 = 1.00000
+[PASS] Energy [mbl] r_sp+R+T+A = 0.00022+0.46123+0.45486+0.08369 = 1.00000
+[PASS] MCML vs absorption-weighting on mismatched tissue slab: Rd differ by 0.34%
+[PASS] Chicken-skin sanity (250 um, mu_s'=2.45/mm, 780 nm, NA 0.25, 10 mW/cm2, dR 0.1): F_down=0.868, C_NA=0.0381, point-mirror r50 at surface=152 um
+    a=50 um: image r50=70 um (sharp square r50 ~20 um), m=0.011, SNR/cycle (camera)=25.9, time to SNR 5 = 0.00667 s
+    a=300 um: image r50=146 um (sharp square r50 ~120 um), m=0.0474, SNR/cycle (camera)=353, time to SNR 5 = 0.00667 s
+[INFO] Statistical errors: every production configuration is run with seeds [1, 2, 3]; results.csv reports mean and standard error across seeds.
+[PASS] Sphere energy conservation (D=1 mm): 1.00000
+[PASS] Large sphere (D=10 mm) vs slab at d=0.2 mm: F_down 0.9725 vs 1.0169 (4.4%); C_NA0.25 0.0586 vs 0.0586 (0.0%)
+[PASS] Low-NA scaling: d=100 um NA 0.02: scaled/direct = 0.998 (3752 non-ballistic photons counted directly); d=500 um NA 0.02: scaled/direct = 1.022 (317 non-ballistic photons counted directly); background Rd at NA 0.02: scaled/direct = 1.036
+[PASS] Tilt=0 launch reproduces round-1 collection: 0.1681 vs 0.1679 (0.10%)
+[PASS] Surface-chip collection formulas; specular tilt limit at NA 0.02 = 0.86 deg
+[PASS] Decoder: 9/9 strong chips decoded; 0 false chips on chip-free frames
+[PASS] dR scaling keeps mean R = 0.4027 and scales the swing (x0.5, x0.25)
+[PASS] Random-orientation sampler: readable fraction 0.2493 vs exact 0.25
+[PASS] Blink-band noise term: 0 noise reproduces SNR (3.700); 1e-3 lowers it (3.503)
+[PASS] h_max(150 um, 0.5 deg) = 1.309 um
+
+== Monte Carlo: 108 jobs ==
+  sphere D=2.0 mu=2.0 lam=635 seed=1: 39s
+  sphere D=2.0 mu=2.0 lam=780 seed=1: 37s
+  sphere D=2.0 mu=2.0 lam=850 seed=1: 16s
+  sphere D=2.0 mu=1.0 lam=635 seed=1: 23s
+  sphere D=2.0 mu=1.0 lam=780 seed=1: 20s
+  sphere D=2.0 mu=1.0 lam=850 seed=1: 10s
+  sphere D=2.0 mu=0.3 lam=635 seed=1: 12s
+  sphere D=2.0 mu=0.3 lam=780 seed=1: 11s
+  sphere D=2.0 mu=0.3 lam=850 seed=1: 5s
+  sphere D=1.0 mu=2.0 lam=635 seed=1: 25s
+  sphere D=1.0 mu=2.0 lam=780 seed=1: 19s
+  sphere D=1.0 mu=2.0 lam=850 seed=1: 10s
+  sphere D=1.0 mu=1.0 lam=635 seed=1: 16s
+  sphere D=1.0 mu=1.0 lam=780 seed=1: 14s
+  sphere D=1.0 mu=1.0 lam=850 seed=1: 7s
+  sphere D=1.0 mu=0.3 lam=635 seed=1: 9s
+  sphere D=1.0 mu=0.3 lam=780 seed=1: 9s
+  sphere D=1.0 mu=0.3 lam=850 seed=1: 3s
+  sphere D=0.5 mu=2.0 lam=635 seed=1: 14s
+  sphere D=0.5 mu=2.0 lam=780 seed=1: 11s
+  sphere D=0.5 mu=2.0 lam=850 seed=1: 5s
+  sphere D=0.5 mu=1.0 lam=635 seed=1: 9s
+  sphere D=0.5 mu=1.0 lam=780 seed=1: 8s
+  sphere D=0.5 mu=1.0 lam=850 seed=1: 4s
+  sphere D=0.5 mu=0.3 lam=635 seed=1: 7s
+  sphere D=0.5 mu=0.3 lam=780 seed=1: 7s
+  sphere D=0.5 mu=0.3 lam=850 seed=1: 3s
+  sphere D=2.0 mu=2.0 lam=635 seed=2: 55s
+  sphere D=2.0 mu=2.0 lam=780 seed=2: 34s
+  sphere D=2.0 mu=2.0 lam=850 seed=2: 15s
+  sphere D=2.0 mu=1.0 lam=635 seed=2: 21s
+  sphere D=2.0 mu=1.0 lam=780 seed=2: 18s
+  sphere D=2.0 mu=1.0 lam=850 seed=2: 8s
+  sphere D=2.0 mu=0.3 lam=635 seed=2: 11s
+  sphere D=2.0 mu=0.3 lam=780 seed=2: 9s
+  sphere D=2.0 mu=0.3 lam=850 seed=2: 4s
+  sphere D=1.0 mu=2.0 lam=635 seed=2: 24s
+  sphere D=1.0 mu=2.0 lam=780 seed=2: 20s
+  sphere D=1.0 mu=2.0 lam=850 seed=2: 9s
+  sphere D=1.0 mu=1.0 lam=635 seed=2: 14s
+  sphere D=1.0 mu=1.0 lam=780 seed=2: 11s
+  sphere D=1.0 mu=1.0 lam=850 seed=2: 5s
+  sphere D=1.0 mu=0.3 lam=635 seed=2: 8s
+  sphere D=1.0 mu=0.3 lam=780 seed=2: 7s
+  sphere D=1.0 mu=0.3 lam=850 seed=2: 3s
+  sphere D=0.5 mu=2.0 lam=635 seed=2: 14s
+  sphere D=0.5 mu=2.0 lam=780 seed=2: 11s
+  sphere D=0.5 mu=2.0 lam=850 seed=2: 5s
+  sphere D=0.5 mu=1.0 lam=635 seed=2: 10s
+  sphere D=0.5 mu=1.0 lam=780 seed=2: 8s
+  sphere D=0.5 mu=1.0 lam=850 seed=2: 3s
+  sphere D=0.5 mu=0.3 lam=635 seed=2: 7s
+  sphere D=0.5 mu=0.3 lam=780 seed=2: 6s
+  sphere D=0.5 mu=0.3 lam=850 seed=2: 3s
+  sphere D=2.0 mu=2.0 lam=635 seed=3: 73s
+  sphere D=2.0 mu=2.0 lam=780 seed=3: 57s
+  sphere D=2.0 mu=2.0 lam=850 seed=3: 20s
+  sphere D=2.0 mu=1.0 lam=635 seed=3: 48s
+  sphere D=2.0 mu=1.0 lam=780 seed=3: 30s
+  sphere D=2.0 mu=1.0 lam=850 seed=3: 9s
+  sphere D=2.0 mu=0.3 lam=635 seed=3: 17s
+  sphere D=2.0 mu=0.3 lam=780 seed=3: 15s
+  sphere D=2.0 mu=0.3 lam=850 seed=3: 4s
+  sphere D=1.0 mu=2.0 lam=635 seed=3: 56s
+  sphere D=1.0 mu=2.0 lam=780 seed=3: 46s
+  sphere D=1.0 mu=2.0 lam=850 seed=3: 17s
+  sphere D=1.0 mu=1.0 lam=635 seed=3: 36s
+  sphere D=1.0 mu=1.0 lam=780 seed=3: 26s
+  sphere D=1.0 mu=1.0 lam=850 seed=3: 15s
+  sphere D=1.0 mu=0.3 lam=635 seed=3: 25s
+  sphere D=1.0 mu=0.3 lam=780 seed=3: 19s
+  sphere D=1.0 mu=0.3 lam=850 seed=3: 8s
+  sphere D=0.5 mu=2.0 lam=635 seed=3: 31s
+  sphere D=0.5 mu=2.0 lam=780 seed=3: 34s
+  sphere D=0.5 mu=2.0 lam=850 seed=3: 14s
+  sphere D=0.5 mu=1.0 lam=635 seed=3: 22s
+  sphere D=0.5 mu=1.0 lam=780 seed=3: 20s
+  sphere D=0.5 mu=1.0 lam=850 seed=3: 10s
+  sphere D=0.5 mu=0.3 lam=635 seed=3: 17s
+  sphere D=0.5 mu=0.3 lam=780 seed=3: 20s
+  sphere D=0.5 mu=0.3 lam=850 seed=3: 6s
+  slab lam=635 mu=2.0 seed=1: 520s
+  slab lam=780 mu=2.0 seed=1: 460s
+  slab lam=850 mu=2.0 seed=1: 427s
+  slab lam=635 mu=1.0 seed=1: 254s
+  slab lam=780 mu=1.0 seed=1: 270s
+  slab lam=850 mu=1.0 seed=1: 190s
+  slab lam=635 mu=0.3 seed=1: 171s
+  slab lam=780 mu=0.3 seed=1: 128s
+  slab lam=850 mu=0.3 seed=1: 129s
+  slab lam=635 mu=2.0 seed=2: 463s
+  slab lam=780 mu=2.0 seed=2: 454s
+  slab lam=850 mu=2.0 seed=2: 324s
+  slab lam=635 mu=1.0 seed=2: 334s
+  slab lam=780 mu=1.0 seed=2: 268s
+  slab lam=850 mu=1.0 seed=2: 190s
+  slab lam=635 mu=0.3 seed=2: 132s
+  slab lam=780 mu=0.3 seed=2: 129s
+  slab lam=850 mu=0.3 seed=2: 167s
+  slab lam=635 mu=2.0 seed=3: 378s
+  slab lam=780 mu=2.0 seed=3: 304s
+  slab lam=850 mu=2.0 seed=3: 269s
+  slab lam=635 mu=1.0 seed=3: 221s
+  slab lam=780 mu=1.0 seed=3: 196s
+  slab lam=850 mu=1.0 seed=3: 202s
+  slab lam=635 mu=0.3 seed=3: 155s
+  slab lam=780 mu=0.3 seed=3: 127s
+  slab lam=850 mu=0.3 seed=3: 127s
+   MC done at 731s
+# Round-3 tables (generated by run_v3.py; do not edit)
+
+Reflectance: R_on/R_off = 0.463/0.342, MEASURED at 635 nm (paper Fig. S11). At 780 and 850 nm the same value is EXTRAPOLATED (optimistic); x0.5 / x0.25 rows assume the true swing there is half / a quarter of it (same mean R). Tissue mu_s' values are quoted at 780 nm and scaled to other wavelengths with b = 1.286. Read = decode ID + value, round-2 calibrated rule (SNR/cycle x sqrt(cycles/bit) >= 23, or 120 beyond 500 um). 10 mW/cm2, mu_a 0.02/mm unless stated.
+
+## 1a. Time to read one chip (s), flat chip: 635 nm measured | 780 nm extrapolated, optimistic  [m at 635]
+
+| camera | chip on dish, SPOT down | on top | 100 um deep | 300 um deep | 300 um deep, 300 um SPOT |
+|---|---|---|---|---|---|
+| plate20MP_NA0.02 | 12 \| 12 [0.26] | 12 \| 12 [0.28] | 12 \| 12 [0.16] | 8.6e+02 \| 50 [0.0031] | 74 \| 12 [0.0039] |
+| plate20MP_NA0.05 | 12 \| 12 [0.26] | 12 \| 12 [0.28] | 12 \| 12 [0.17] | 93 \| 12 [0.0096] | 12 \| 12 [0.012] |
+| plate60MP_NA0.02 | 50 \| 50 [0.26] | 50 \| 50 [0.28] | 50 \| 50 [0.16] | 3.5e+02 \| 50 [0.0031] | 50 \| 50 [0.0039] |
+| 4x20MP_NA0.04 | 12 \| 12 [0.26] | 12 \| 12 [0.28] | 12 \| 12 [0.17] | 50 \| 12 [0.0069] | 12 \| 12 [0.009] |
+| 16x20MP_NA0.08 | 12 \| 12 [0.26] | 12 \| 12 [0.28] | 12 \| 12 [0.19] | 12 \| 12 [0.019] | 12 \| 12 [0.025] |
+| scan_NA0.25 | 0.41 \| 0.41 [0.25] | 0.41 \| 0.41 [0.26] | 0.41 \| 0.41 [0.21] | 0.41 \| 0.41 [0.062] | 0.41 \| 0.41 [0.087] |
+
+Whole plate (chip on dish, SPOT down, 100 um SPOT, flat): fixed 20 MP camera = one chip read time (all wells in parallel); scanning head = wells x (0.5 s move + read).
+
+| architecture | 635 nm 96-well | 635 nm 384-well | 780 nm 96-well |
+|---|---|---|---|
+| 1 fixed 20 MP camera, NA 0.02 | 12 s | 12 s | 12 s |
+| 16 fixed cameras, NA 0.08 | 12 s | 12 s | 12 s |
+| scanning head, NA 0.25 | 88 s | 3.5e+02 s | 88 s |
+
+## 1b. Chip at the CENTRE of an organoid, flat, scanning head: read time (s), 635 measured | 780 extrapolated  [m at 635]
+
+| D (mm) | SPOT | mu_s' | from above | from below | plate camera NA 0.02, above, 635 |
+|---|---|---|---|---|---|
+| 0.5 | 30 | 0.3 | yes 0.41 \| yes 0.41 [0.24] | yes 0.41 \| yes 0.41 [0.21] | yes 12 |
+| 0.5 | 30 | 1.0 | yes 0.41 \| yes 0.41 [0.088] | yes 0.41 \| yes 0.41 [0.055] | NO 1.6e+03 |
+| 0.5 | 30 | 2.0 | yes 0.41 \| yes 0.41 [0.0061] | yes 1.2 \| yes 0.41 [0.0032] | NO 4.5e+06 |
+| 0.5 | 100 | 0.3 | yes 0.41 \| yes 0.41 [0.25] | yes 0.41 \| yes 0.41 [0.22] | yes 12 |
+| 0.5 | 100 | 1.0 | yes 0.41 \| yes 0.41 [0.14] | yes 0.41 \| yes 0.41 [0.092] | NO 87 |
+| 0.5 | 100 | 2.0 | yes 0.41 \| yes 0.41 [0.032] | yes 0.41 \| yes 0.41 [0.017] | NO 5.8e+04 |
+| 0.5 | 300 | 0.3 | yes 0.41 \| yes 0.41 [0.25] | yes 0.41 \| yes 0.41 [0.22] | yes 12 |
+| 0.5 | 300 | 1.0 | yes 0.41 \| yes 0.41 [0.15] | yes 0.41 \| yes 0.41 [0.11] | yes 12 |
+| 0.5 | 300 | 2.0 | yes 0.41 \| yes 0.41 [0.058] | yes 0.41 \| yes 0.41 [0.033] | NO 2.6e+03 |
+| 1.0 | 30 | 0.3 | yes 0.41 \| yes 0.41 [0.16] | yes 0.41 \| yes 0.41 [0.12] | yes 25 |
+| 1.0 | 30 | 1.0 | yes 1.4 \| yes 0.41 [0.0016] | yes 5 \| yes 1 [0.0008] | NO 2.2e+07 |
+| 1.0 | 30 | 2.0 | yes 49 \| yes 14 [0.0001] | NO 1.5e+02 \| yes 49 [5.5e-05] | NO 6.4e+08 |
+| 1.0 | 100 | 0.3 | yes 0.41 \| yes 0.41 [0.2] | yes 0.41 \| yes 0.41 [0.15] | yes 12 |
+| 1.0 | 100 | 1.0 | yes 0.41 \| yes 0.41 [0.013] | yes 0.41 \| yes 0.41 [0.0069] | NO 2.1e+05 |
+| 1.0 | 100 | 2.0 | yes 0.41 \| yes 0.41 [0.0011] | yes 1.4 \| yes 0.62 [0.00062] | NO 5.4e+06 |
+| 1.0 | 300 | 0.3 | yes 0.41 \| yes 0.41 [0.21] | yes 0.41 \| yes 0.41 [0.17] | yes 12 |
+| 1.0 | 300 | 1.0 | yes 0.41 \| yes 0.41 [0.042] | yes 0.41 \| yes 0.41 [0.023] | NO 4.7e+03 |
+| 1.0 | 300 | 2.0 | yes 0.41 \| yes 0.41 [0.0073] | yes 0.41 \| yes 0.41 [0.0041] | NO 8.3e+04 |
+| 2.0 | 30 | 0.3 | yes 3.5 \| yes 0.62 [0.026] | yes 12 \| yes 1.9 [0.014] | NO 7.4e+05 |
+| 2.0 | 30 | 1.0 | NO 5.4e+03 \| NO 1.8e+03 [2.5e-05] | NO 1.7e+04 \| NO 6.1e+03 [1.4e-05] | NO 7.7e+10 |
+| 2.0 | 30 | 2.0 | NO 3.9e+04 \| NO 2.1e+04 [5.3e-06] | NO 1.1e+05 \| NO 6e+04 [3.2e-06] | NO 3.8e+11 |
+| 2.0 | 100 | 0.3 | yes 0.41 \| yes 0.41 [0.042] | yes 0.41 \| yes 0.41 [0.026] | NO 3.3e+04 |
+| 2.0 | 100 | 1.0 | yes 44 \| yes 15 [0.00028] | NO 1.4e+02 \| yes 50 [0.00015] | NO 6.4e+08 |
+| 2.0 | 100 | 2.0 | NO 3.2e+02 \| NO 1.7e+02 [5.9e-05] | NO 8.8e+02 \| NO 4.9e+02 [3.6e-05] | NO 3.1e+09 |
+| 2.0 | 300 | 0.3 | yes 0.41 \| yes 0.41 [0.089] | yes 0.41 \| yes 0.41 [0.055] | NO 2.4e+03 |
+| 2.0 | 300 | 1.0 | yes 0.62 \| yes 0.41 [0.0023] | yes 2.1 \| yes 0.83 [0.0013] | NO 8.6e+06 |
+| 2.0 | 300 | 2.0 | yes 4.1 \| yes 2.3 [0.00055] | yes 11 \| yes 6.4 [0.00033] | NO 4.1e+07 |
+
+## 1c. Maximum depth (um) decoded within 60 s, flat chip (slab): 635 measured | 780 extrapolated
+
+| SPOT | mu_s' | scanning head NA 0.25 | plate camera NA 0.02 |
+|---|---|---|---|
+| 30 | 0.3 | >=1000 \| >=1000 | 500 \| 500 |
+| 30 | 1.0 | 500 \| 500 | 150 \| 200 |
+| 30 | 2.0 | 500 \| 500 | 50 \| 100 |
+| 100 | 0.3 | >=1000 \| >=1000 | 500 \| 500 |
+| 100 | 1.0 | >=1000 \| >=1000 | 200 \| 300 |
+| 100 | 2.0 | 500 \| 500 | 100 \| 150 |
+| 300 | 0.3 | >=1000 \| >=1000 | 500 \| 500 |
+| 300 | 1.0 | >=1000 \| >=1000 | 250 \| 300 |
+| 300 | 2.0 | >=1000 \| >=1000 | 100 \| 150 |
+
+## 1d. If the true reflectance change at 780/850 nm is smaller (baseline tissue, 100 um SPOT unless stated)
+
+| wavelength, dR | dish chip, scan: t [m] | dish chip, plate NA 0.02: t | centre of 1 mm organoid, scan, above: t | centre configs readable (scan, above, of 27) | max depth, scan, 100 um SPOT | max depth, scan, 30 um SPOT |
+|---|---|---|---|---|---|---|
+| 635 nm, x1 (measured) | 0.41 [0.25] | 12 | 0.41 | 24 | >=1000 | 500 |
+| 780 nm, x1 | 0.41 [0.25] | 12 | 0.41 | 24 | >=1000 | 500 |
+| 780 nm, x0.5 | 0.41 [0.12] | 12 | 0.41 | 24 | >=1000 | 500 |
+| 780 nm, x0.25 | 0.41 [0.062] | 12 | 0.41 | 22 | 500 | 500 |
+| 850 nm, x1 | 0.41 [0.25] | 12 | 0.41 | 24 | >=1000 | 500 |
+| 850 nm, x0.5 | 0.41 [0.13] | 12 | 0.41 | 24 | >=1000 | 500 |
+| 850 nm, x0.25 | 0.41 [0.063] | 12 | 0.41 | 22 | 500 | 500 |
+
+## 2. Chip at the centre, RANDOM orientation, scanning head, from above (mirror SPOT)
+
+| D (mm) | SPOT | mu_s' | 635: median t | 635: 90th pct | 635: within 1 s / 10 s / 60 s | 780: within 1 s / 60 s | flat chip, 635 |
+|---|---|---|---|---|---|---|---|
+| 0.5 | 30 | 0.3 | 1.3e+04 | 1.3e+07 | 4% / 10% / 16% | 4% / 20% | 0.41 |
+| 0.5 | 30 | 1.0 | 3.9e+03 | 2.9e+05 | 4% / 12% / 21% | 4% / 23% | 0.41 |
+| 0.5 | 30 | 2.0 | 1e+03 | 1.3e+04 | 1% / 10% / 22% | 3% / 21% | 0.41 |
+| 0.5 | 100 | 0.3 | 3.6e+02 | 1.6e+05 | 12% / 28% / 38% | 15% / 39% | 0.41 |
+| 0.5 | 100 | 1.0 | 35 | 2.8e+03 | 22% / 40% / 54% | 21% / 50% | 0.41 |
+| 0.5 | 100 | 2.0 | 8.7 | 1.1e+02 | 26% / 52% / 81% | 23% / 66% | 0.41 |
+| 0.5 | 300 | 0.3 | 13 | 2.9e+03 | 32% / 48% / 61% | 29% / 56% | 0.41 |
+| 0.5 | 300 | 1.0 | 0.83 | 52 | 52% / 69% / 92% | 47% / 88% | 0.41 |
+| 0.5 | 300 | 2.0 | 0.41 | 2.1 | 76% / 100% / 100% | 65% / 100% | 0.41 |
+| 1.0 | 30 | 0.3 | 3.4e+04 | 2.9e+06 | 3% / 8% / 13% | 4% / 17% | 0.41 |
+| 1.0 | 30 | 1.0 | 3.4e+03 | 5.7e+04 | 0% / 4% / 12% | 1% / 12% | 1.4 |
+| 1.0 | 30 | 2.0 | 1.6e+03 | 9e+03 | 0% / 0% / 2% | 0% / 8% | 49 |
+| 1.0 | 100 | 0.3 | 4.1e+02 | 4.1e+04 | 12% / 27% / 38% | 13% / 37% | 0.41 |
+| 1.0 | 100 | 1.0 | 29 | 4.8e+02 | 15% / 38% / 61% | 14% / 48% | 0.41 |
+| 1.0 | 100 | 2.0 | 13 | 75 | 7% / 44% / 84% | 12% / 69% | 0.41 |
+| 1.0 | 300 | 0.3 | 6.6 | 9.7e+02 | 35% / 53% / 65% | 33% / 61% | 0.41 |
+| 1.0 | 300 | 1.0 | 0.41 | 6.8 | 61% / 97% / 100% | 48% / 100% | 0.41 |
+| 1.0 | 300 | 2.0 | 0.41 | 1.2 | 83% / 100% / 100% | 68% / 100% | 0.41 |
+| 2.0 | 30 | 0.3 | 1.9e+06 | 3.1e+07 | 0% / 0% / 1% | 0% / 3% | 3.5 |
+| 2.0 | 30 | 1.0 | 2e+05 | 1.1e+06 | 0% / 0% / 0% | 0% / 0% | 5.4e+03 |
+| 2.0 | 30 | 2.0 | 2.1e+05 | 5.9e+05 | 0% / 0% / 0% | 0% / 0% | 3.9e+04 |
+| 2.0 | 100 | 0.3 | 1.6e+04 | 4.1e+05 | 2% / 6% / 15% | 2% / 12% | 0.41 |
+| 2.0 | 100 | 1.0 | 1.7e+03 | 9.4e+03 | 0% / 0% / 2% | 0% / 8% | 44 |
+| 2.0 | 100 | 2.0 | 1.7e+03 | 4.9e+03 | 0% / 0% / 0% | 0% / 0% | 3.2e+02 |
+| 2.0 | 300 | 0.3 | 2.1e+02 | 5.4e+03 | 14% / 27% / 40% | 11% / 38% | 0.41 |
+| 2.0 | 300 | 1.0 | 21 | 1.2e+02 | 3% / 37% / 70% | 8% / 59% | 0.62 |
+| 2.0 | 300 | 2.0 | 22 | 65 | 0% / 24% / 87% | 0% / 77% | 4.1 |
+
+## 3a. How flat must a chip on the dish be? (SPOT facing the glass, no tissue in the path)
+
+Tilt limit = largest tilt that still decodes within 60 s (round-2 tilt runs); optics-only limit = 0.5*asin(2 NA / n) where the reflected cone leaves the lens entirely. Largest particle height h = side x tan(limit).
+
+| reader | NA | tilt limit | optics-only limit | h max, 150 um chip | 200 um chip | 300 um chip | tilt from a 5 um particle (150/300 um chip) |
+|---|---|---|---|---|---|---|---|
+| plate20MP_NA0.02 | 0.02 | 0.52 deg | 0.86 deg | 1.4 um | 1.8 um | 2.7 um | 1.9 / 1.0 deg: fails |
+| plate20MP_NA0.05 | 0.05 | 2.02 deg | 2.16 deg | 5.3 um | 7.1 um | 10.6 um | 1.9 / 1.0 deg: OK |
+| 16x20MP_NA0.08 | 0.08 | 3.10 deg | 3.45 deg | 8.1 um | 10.8 um | 16.2 um | 1.9 / 1.0 deg: OK |
+| scan_NA0.25 | 0.25 | 10.66 deg | 11.04 deg | 28.2 um | 37.6 um | 56.5 um | 1.9 / 1.0 deg: OK |
+
+## 3b. Fraction of settled chips that can be read (tilt uniform 0-2 deg, half land SPOT-up, 100 um SPOT, baseline tissue)
+
+| reader | one SPOT, read from below | (a) SPOT on both faces, read from below | (b) one SPOT, read below + above, chip beside the organoid | (b) same, chip under a 1 mm organoid |
+|---|---|---|---|---|
+| plate20MP_NA0.02 | 13% | 26% | 26% | 13% |
+| plate20MP_NA0.05 | 50% | 100% | 100% | not simulated |
+| 16x20MP_NA0.08 | 50% | 100% | 100% | not simulated |
+| scan_NA0.25 | 50% | 100% | 100% | 100% |
+
+## 4. Sensitivity ranking (635 nm, scanning head, 100 um SPOT, baseline tissue): ranked by effect on the centre read
+
+| rank | input | range tested | chip on dish: read time | centre of 1 mm organoid: read time | max depth (um), across range | bench measurement that pins it |
+|---|---|---|---|---|---|---|
+| 1 | added noise at the blink frequency | 0 to 1e-2 per sqrt(Hz) | 0.41-26 s | 0.41-9.4e+03 s | >=1000 / 500 / 300 / 150 | lock-in recording of an unpowered chip in a real organoid (apparent m vs averaging time) |
+| 2 | chip tilt | dish: 0-10 deg; centre: flat vs random orientation (90th pct) | 0.41-0.41 s | 0.41-4.8e+02 s | n/a | image settled chips (tilt histogram) and wedge test under the reader |
+| 3 | reflectance change dR | 100% to 25% of the 635 nm value | 0.41-0.41 s | 0.41-0.41 s | >=1000 / 500 / 500 | bare-chip reflectance at 635 and 780 nm under the reader's own light |
+| 4 | tissue scattering mu_s' | 0.3-2.0 /mm (at 780) | 0.41-0.41 s | 0.41-0.41 s | >=1000 / >=1000 / 500 | organoid mu_s' (OCT attenuation or integrating sphere on sections) |
+| 5 | absorption mu_a | 0.01-0.05 /mm | 0.41-0.41 s | 0.41-0.41 s | >=1000 / >=1000 / >=1000 | organoid absorption spectrum (spectrophotometry of homogenate) |
+| 6 | light level | 1-100 mW/cm2 | 0.41-0.41 s | 0.41-0.41 s | >=1000 / >=1000 / >=1000 | power meter at the sample plane; camera full-well check |
+assets written; GIF decoded 3/3 chips from 12.4 s of synthetic frames
+== done in 770s ==

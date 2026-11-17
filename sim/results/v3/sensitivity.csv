@@ -1,0 +1,7 @@
+input,range,dish_t,centre1_t,centre2_t,max_depth,score,bench
+added noise at the blink frequency,0 to 1e-2 per sqrt(Hz) (apparent m in a 1 s average),0.41-26 s,0.41-9.4e+03 s,44-5.8e+08 s,>=1000 / 500 / 300 / 150,7.11404,lock-in recording of an unpowered chip inside a real organoid (apparent m vs averaging time)
+chip orientation,dish: tilt 0-10 deg; centre: flat vs random (90th percentile),0.41-0.41 s,0.41-4.8e+02 s,44-9.4e+03 s,n/a,3.06352,image settled / embedded chips to get their tilt distribution; wedge test under the reader
+tissue scattering mu_s',0.3-2.0 /mm (at 780),0.41-0.41 s,0.41-0.41 s,0.41-3.2e+02 s,>=1000 / >=1000 / 500,2.88902,"organoid mu_s' (OCT attenuation, or integrating sphere on sections)"
+reflectance change dR,100% to 25% of the 635 nm value,0.41-0.41 s,0.41-0.41 s,44-7.1e+02 s,>=1000 / 500 / 500,1.20349,bare-chip reflectance at 635 and 780 nm under the reader's own light
+light level,1-100 mW/cm2 (reading only; the chip's power needs ~10),0.41-0.41 s,0.41-0.41 s,44-61 s,>=1000 / >=1000 / >=1000,0.138853,power meter at the sample plane; check the camera saturates
+absorption mu_a,0.01-0.05 /mm,0.41-0.41 s,0.41-0.41 s,not run,>=1000 / >=1000 / >=1000,0,organoid absorption spectrum (spectrophotometry of a homogenate)
