@@ -1,0 +1,10 @@
+total_seconds 450
+quick False
+N1_slab 1000000
+N2_slab 600000
+N2_tilt 300000
+N1_sphere 600000
+N2_sphere 300000
+seeds [1, 2, 3]
+decoder_trials 8
+workers 15

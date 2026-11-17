@@ -1,0 +1,13 @@
+architecture,chip,read_s,interval_min,duty,avg_irradiance_mW_cm2,daily_dose_J_cm2
+"scanning head, light only on the well being read",surface a=100,0.463333,1,0.00772222,0.0772222,6.672
+"scanning head, light only on the well being read",surface a=100,0.463333,5,0.00154444,0.0154444,1.3344
+"scanning head, light only on the well being read",surface a=100,0.463333,15,0.000514815,0.00514815,0.4448
+"scanning head, light only on the well being read",embedded 300 um a=100,0.463333,1,0.00772222,0.0772222,6.672
+"scanning head, light only on the well being read",embedded 300 um a=100,0.463333,5,0.00154444,0.0154444,1.3344
+"scanning head, light only on the well being read",embedded 300 um a=100,0.463333,15,0.000514815,0.00514815,0.4448
+"scanning head, whole plate lit during a 96-well scan",embedded 300 um a=100,87.68,1,1,10,864
+"scanning head, whole plate lit during a 96-well scan",embedded 300 um a=100,87.68,5,0.292267,2.92267,252.518
+"scanning head, whole plate lit during a 96-well scan",embedded 300 um a=100,87.68,15,0.0974222,0.974222,84.1728
+fixed whole-plate camera (flat chips),surface a=100,12.45,1,0.2075,2.075,179.28
+fixed whole-plate camera (flat chips),surface a=100,12.45,5,0.0415,0.415,35.856
+fixed whole-plate camera (flat chips),surface a=100,12.45,15,0.0138333,0.138333,11.952

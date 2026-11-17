@@ -81,6 +81,7 @@ def run(slab, n_photons, rng, *, mode="mbl", mua_list=None, start=None,
         uy = np.array(start["uy"], float); uz = np.array(start["uz"], float)
         w0 = np.array(start.get("w0", np.ones_like(z)), float)
         out["r_sp"] = 0.0
+    lb = np.zeros(N, bool) if start is None else np.array(start.get("launch_ballistic", np.zeros(N, bool)))
     x = np.zeros(N); y = np.zeros(N)
     L = np.zeros(N)                 # path length (mm)
     m = np.ones(N)                  # roulette multiplier (mbl) or weight (mcml)
@@ -96,8 +97,9 @@ def run(slab, n_photons, rng, *, mode="mbl", mua_list=None, start=None,
         P = len(planes)
         F = np.zeros((nm, P)); Fb = np.zeros((nm, P))
         H = np.zeros((P, theta_bins))
+        H_up = np.zeros((P, theta_bins))     # polar angle measured from -z for upward light
         F_up = np.zeros((nm, P))
-    exits_top = {k: [] for k in ("x", "y", "ux", "uy", "uz", "L", "m", "w0", "nscat")}
+    exits_top = {k: [] for k in ("x", "y", "ux", "uy", "uz", "L", "m", "w0", "nscat", "lb")}
     top_cos_all = []; top_w_all = []
 
     mut_step = s.mus if mode == "mbl" else s.mus + s.mua
@@ -140,7 +142,11 @@ def run(slab, n_photons, rng, *, mode="mbl", mua_list=None, start=None,
                 cu = (uz < 0) & (z > p) & (z_end <= p)
                 if cu.any():
                     Lc = L[cu] + (z[cu] - p) / (-uz[cu])
-                    F_up[:, k] += weights(m[cu], Lc, w0[cu]).sum(1)
+                    Wu = weights(m[cu], Lc, w0[cu])
+                    F_up[:, k] += Wu.sum(1)
+                    thu = np.arccos(np.clip(-uz[cu], -1, 1))
+                    bu = np.minimum((thu / (np.pi / 2) * theta_bins).astype(int), theta_bins - 1)
+                    H_up[k] += np.bincount(bu, weights=Wu[ref], minlength=theta_bins)
 
         # ---- absorption bookkeeping (for the energy-conservation check)
         if mode == "mbl":
@@ -171,7 +177,7 @@ def run(slab, n_photons, rng, *, mode="mbl", mua_list=None, start=None,
                 top_w_all.append(W)
                 if record_exits:
                     for key, arr in (("x", x), ("y", y), ("ux", ux), ("uy", uy), ("uz", uz),
-                                     ("L", L), ("m", m), ("w0", w0), ("nscat", nscat)):
+                                     ("L", L), ("m", m), ("w0", w0), ("nscat", nscat), ("lb", lb)):
                         exits_top[key].append(arr[esc_up].copy())
             if esc_dn.size:
                 W = weights(m[esc_dn], L[esc_dn], w0[esc_dn])
@@ -218,7 +224,7 @@ def run(slab, n_photons, rng, *, mode="mbl", mua_list=None, start=None,
 
         keep = alive
         if not keep.all():
-            z, ux, uy, uz, x, y, L, m, w0, nscat = (a[keep] for a in (z, ux, uy, uz, x, y, L, m, w0, nscat))
+            z, ux, uy, uz, x, y, L, m, w0, nscat, lb = (a[keep] for a in (z, ux, uy, uz, x, y, L, m, w0, nscat, lb))
 
     if z.size:   # hit iteration cap: report the weight we did not finish
         lost = float(np.sum(w0 * m * np.exp(-s.mua * L)) if mode == "mbl" else np.sum(m))
@@ -232,7 +238,7 @@ def run(slab, n_photons, rng, *, mode="mbl", mua_list=None, start=None,
         out["top_cos"] = np.zeros(0); out["top_w"] = np.zeros((nm, 0))
     if planes is not None:
         out.update(planes=planes, F_down=F / N, F_ball=Fb / N, F_up=F_up / N,
-                   theta_hist=H / N, theta_bins=theta_bins)
+                   theta_hist=H / N, theta_hist_up=H_up / N, theta_bins=theta_bins)
     if record_exits:
         out["exits"] = {k: (np.concatenate(v) if v else np.zeros(0)) for k, v in exits_top.items()}
     return out

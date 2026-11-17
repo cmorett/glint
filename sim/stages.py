@@ -42,7 +42,8 @@ def stage1(slab, depths_mm, n_photons, seed, mua_list=C.MUA_PER_MM, na_list=C.NA
                lost=o["lost"], mua_list=np.asarray(mua_list), na_list=np.asarray(na_list))
     if planes:
         res.update(planes=np.asarray(planes), F_down=o["F_down"], F_ball=o["F_ball"],
-                   F_up=o["F_up"], theta_hist=o["theta_hist"])
+                   F_up=o["F_up"], theta_hist=o["theta_hist"],
+                   theta_hist_up=o["theta_hist_up"])
     return res
 
 

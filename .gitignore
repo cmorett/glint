@@ -1,3 +1,4 @@
 __pycache__/
 .pytest_cache/
 *.pyc
+sim/results/v2/mc_v2.pkl
