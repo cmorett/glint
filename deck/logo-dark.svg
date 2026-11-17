@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-6 -30 412 228" width="412" height="228" role="img" aria-label="glint">
+  <title>glint</title>
+  <g fill="none" stroke="#F6F4EF" stroke-width="20">
+    <circle cx="50" cy="90" r="40"/>
+    <path d="M90 40V150A30 30 0 0 1 60 180H24"/>
+    <path d="M134 0V140"/>
+    <path d="M180 40V140"/>
+    <path d="M226 40V140M226 90A40 40 0 0 1 306 90V140"/>
+    <path d="M352 8V110A30 30 0 0 0 382 140H394"/>
+    <path d="M330 50H392"/>
+  </g>
+  <rect x="169" y="6" width="22" height="22" fill="#FF4D2E"/>
+  <path d="M197 0L215 -18" stroke="#FF4D2E" stroke-width="4" stroke-linecap="square"/>
+</svg>

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Glint — Brand system</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+body{background:var(--paper);color:var(--ink);font-family:var(--body);width:1920px}
+.wrap{padding:96px}
+.label{font:500 18px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--slate);display:flex;gap:16px;align-items:center}
+.label b{color:var(--signal-ink);font-weight:500}
+h1{font:600 72px/1.05 var(--display);letter-spacing:-.025em;margin:20px 0 12px}
+.lede{font:400 26px/1.45 var(--body);color:var(--slate);max-width:1100px}
+.rule{height:1px;background:var(--hairline);margin:64px 0 40px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.card{border:1px solid var(--hairline);border-radius:8px;padding:40px;position:relative;min-height:320px;display:flex;align-items:center;justify-content:center}
+.card.ink{background:var(--ink);border-color:var(--ink)}
+.card .cap{position:absolute;left:24px;bottom:18px;font:400 16px var(--mono);color:var(--slate)}
+.card.ink .cap{color:var(--slate-light)}
+.sw{border-radius:8px;height:200px;padding:20px;display:flex;flex-direction:column;justify-content:flex-end;font:500 18px/1.5 var(--mono)}
+.sw small{font:400 16px var(--mono);opacity:.85}
+.type-row{display:grid;grid-template-columns:280px 1fr;align-items:baseline;border-top:1px solid var(--hairline);padding:22px 0}
+.type-row .k{font:400 16px/1.5 var(--mono);color:var(--slate)}
+.blink{display:flex;gap:8px}
+.blink i{width:22px;height:22px;display:block;border:2px solid var(--signal)}
+.blink i.on{background:var(--signal)}
+</style></head>
+<body><div class="wrap">
+
+<div class="label"><b>00</b> — Brand system <span style="flex:1;height:1px;background:var(--hairline)"></span> Glint · v1.0</div>
+<h1>glint — a flash of reflected light</h1>
+<p class="lede">A SPOT is a tiny mirror that changes brightness to send data. The mark turns the dot of the <i>i</i> into that mirror: one square pixel, with the light it throws back.</p>
+
+<div class="rule"></div>
+<div class="label">Logo exploration — dot treatment</div>
+<div class="grid" style="margin-top:28px">
+  <div class="card" style="grid-column:span 4"><svg viewBox="-6 -30 412 228" width="420"><use href="#wm-strokes" stroke="#0B0F14"/><use href="#dot-arcs"/></svg><span class="cap">A · concentric arcs — rejected, reads as Wi-Fi</span></div>
+  <div class="card" style="grid-column:span 4"><svg viewBox="-6 -30 412 228" width="420"><use href="#wm-strokes" stroke="#0B0F14"/><use href="#dot-flare"/></svg><span class="cap">B · single reflected ray — chosen</span></div>
+  <div class="card" style="grid-column:span 4"><svg viewBox="-6 -30 412 228" width="420"><use href="#wm-strokes" stroke="#0B0F14"/><use href="#dot-plain"/></svg><span class="cap">C · plain pixel — rejected, no glint</span></div>
+</div>
+
+<div class="rule"></div>
+<div class="label">Primary marks</div>
+<div class="grid" style="margin-top:28px">
+  <div class="card" style="grid-column:span 6;min-height:440px"><img src="logo.svg" width="620"><span class="cap">logo.svg — on Paper</span></div>
+  <div class="card ink" style="grid-column:span 6;min-height:440px"><img src="logo-dark.svg" width="620"><span class="cap">logo-dark.svg — on Ink</span></div>
+  <div class="card" style="grid-column:span 4"><div style="display:flex;gap:48px;align-items:flex-end"><img src="icon.svg" width="160"><img src="icon.svg" width="64"><img src="icon.svg" width="32"><img src="icon.svg" width="20"></div><span class="cap">icon.svg — 160 / 64 / 32 / 20 px</span></div>
+  <div class="card ink" style="grid-column:span 4"><div style="display:flex;gap:48px;align-items:flex-end"><img src="icon.svg" width="160"><img src="icon.svg" width="64"><img src="icon.svg" width="32"><img src="icon.svg" width="20"></div><span class="cap">icon.svg — same file on Ink</span></div>
+  <div class="card" style="grid-column:span 4"><div style="display:flex;flex-direction:column;gap:36px;align-items:flex-start"><img src="logo.svg" width="260"><img src="logo.svg" width="140"><img src="logo.svg" width="80"></div><span class="cap">minimum size: 80 px wide</span></div>
+</div>
+
+<div class="rule"></div>
+<div class="label">Palette — text contrast measured against its background</div>
+<div class="grid" style="margin-top:28px">
+  <div class="sw" style="grid-column:span 2;background:var(--ink);color:var(--paper)">Ink<small>#0B0F14 · 17.6:1 on Paper</small></div>
+  <div class="sw" style="grid-column:span 2;background:var(--paper);color:var(--ink);border:1px solid var(--hairline)">Paper<small>#F6F4EF</small></div>
+  <div class="sw" style="grid-column:span 2;background:var(--signal);color:var(--ink)">Signal<small>#FF4D2E · graphics; 5.7:1 on Ink</small></div>
+  <div class="sw" style="grid-column:span 2;background:var(--nir);color:#fff">NIR<small>#B23A6B · rays; 5.0:1 on Paper</small></div>
+  <div class="sw" style="grid-column:span 2;background:var(--tissue);color:var(--ink)">Tissue<small>#F2B8A0 · organoid fill</small></div>
+  <div class="sw" style="grid-column:span 2;background:var(--slate);color:var(--paper)">Slate<small>#5B6573 · 5.4:1 on Paper</small></div>
+  <div class="sw" style="grid-column:span 2;background:var(--hairline);color:var(--ink)">Hairline<small>#D9D4CA · rules only</small></div>
+  <div class="sw" style="grid-column:span 2;background:var(--signal-ink);color:#fff">Signal-ink<small>#C2331A · small accent text on Paper, 5.0:1</small></div>
+  <div class="sw" style="grid-column:span 2;background:var(--slate-light);color:var(--ink)">Slate-light<small>#A3ACB8 · 2nd text on Ink, 8.2:1</small></div>
+  <div class="sw" style="grid-column:span 2;background:var(--nir-light);color:var(--ink)">NIR-light<small>#E58AB0 · NIR on Ink</small></div>
+  <div class="sw" style="grid-column:span 4;background:var(--paper);border:1px solid var(--hairline);color:var(--ink);justify-content:center;gap:14px">Rule of one<small style="color:var(--slate)">Signal marks the single key element per slide. Everything else is Ink, Slate and hairlines.</small></div>
+</div>
+
+<div class="rule"></div>
+<div class="label">Type scale — nothing below 16 px</div>
+<div style="margin-top:20px">
+  <div class="type-row"><span class="k">Hero · Space Grotesk 600<br>120 / -3%</span><span style="font:600 120px/1 var(--display);letter-spacing:-.03em">Every organoid</span></div>
+  <div class="type-row"><span class="k">Title · Space Grotesk 600<br>68 / -2.5%</span><span style="font:600 68px/1.05 var(--display);letter-spacing:-.025em">The black box gets a voice</span></div>
+  <div class="type-row"><span class="k">Subhead · Space Grotesk 500<br>32</span><span style="font:500 32px var(--display);letter-spacing:-.01em">Light in, data out — one camera, every well</span></div>
+  <div class="type-row"><span class="k">Body · Inter 400<br>26 / 1.45</span><span style="font:400 26px/1.45 var(--body);color:var(--slate)">Light-powered sensor chips that live inside 3D human tissue and report to an ordinary camera.</span></div>
+  <div class="type-row"><span class="k">Data · JetBrains Mono 500<br>20</span><span style="font:500 20px var(--mono)">~40 µs rise · ~110 µs fall · 20–90 pJ/bit</span></div>
+  <div class="type-row"><span class="k">Source tag · JetBrains Mono<br>16</span><span style="font:400 16px var(--mono);color:var(--slate)">arXiv 2606.23916</span></div>
+</div>
+
+<div class="rule"></div>
+<div class="grid">
+  <div style="grid-column:span 6">
+    <div class="label">Motif — blink code</div>
+    <p class="lede" style="font-size:22px;margin:16px 0 24px">Squares read as reflected-light pulses: filled = mirror bright (1), outlined = dark (0). Each slide header carries its page number in blink code.</p>
+    <div style="display:flex;gap:40px;align-items:center">
+      <div class="blink"><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i></div>
+      <span style="font:500 20px var(--mono);color:var(--slate)">1 0 1 1 0</span>
+    </div>
+  </div>
+  <div style="grid-column:span 6">
+    <div class="label">Placeholder — the only way missing facts appear</div>
+    <p class="lede" style="font-size:22px;margin:16px 0 24px">Dashed outline, mono, bracketed. Search the source for <span style="font-family:var(--mono)">class="ph"</span> to find every one.</p>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;font-size:20px"><span class="ph">[QUOTE — interviewee role]</span><span class="ph">n = [__]</span><span class="ph">[CONFIRMED / MIXED / REJECTED]</span></div>
+  </div>
+</div>
+</div>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <g id="wm-strokes" fill="none" stroke-width="20">
+      <circle cx="50" cy="90" r="40"/>
+      <path d="M90 40V150A30 30 0 0 1 60 180H24"/>
+      <path d="M134 0V140"/>
+      <path d="M180 40V140"/>
+      <path d="M226 40V140M226 90A40 40 0 0 1 306 90V140"/>
+      <path d="M352 8V110A30 30 0 0 0 382 140H394"/>
+      <path d="M330 50H392"/>
+    </g>
+    <g id="dot-arcs">
+      <rect x="169" y="6" width="22" height="22" fill="#FF4D2E"/>
+      <g fill="none" stroke="#FF4D2E" stroke-width="4" stroke-linecap="round">
+        <path d="M185.69 -4.25A22 22 0 0 1 201.25 11.31"/>
+        <path d="M188.28 -13.91A32 32 0 0 1 210.91 8.72"/>
+      </g>
+    </g>
+    <g id="dot-flare"><rect x="169" y="6" width="22" height="22" fill="#FF4D2E"/><path d="M197 0L215 -18" stroke="#FF4D2E" stroke-width="4" stroke-linecap="square"/></g>
+    <g id="dot-plain"><rect x="169" y="6" width="22" height="22" fill="#FF4D2E"/></g>
+  </defs>
+</svg>
+</body></html>

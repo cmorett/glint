@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Glint — Y-Prize Phase 1</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+@page{size:1920px 1080px;margin:0}
+html,body{margin:0;background:#2a2a2a}
+@media print{html,body{background:none}}
+.slide{position:relative;width:1920px;height:1080px;overflow:hidden;background:var(--paper);color:var(--ink);font-family:var(--body);page-break-after:always;break-after:page}
+.slide:last-of-type{page-break-after:auto;break-after:auto}
+.slide.dark{background:var(--ink);color:var(--paper)}
+.abs{position:absolute}
+svg.full{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:visible}
+
+/* header / footer */
+.hdr{position:absolute;left:96px;right:96px;top:50px;display:flex;align-items:center;gap:20px;font:500 18px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--slate);z-index:2}
+.hdr b{color:var(--signal-ink);font-weight:500}
+.dark .hdr{color:var(--slate-light)} .dark .hdr b{color:var(--signal)}
+.hdr .line{flex:1;height:1px;background:var(--hairline)}
+.dark .hdr .line{background:var(--hairline-dark)}
+.bc{display:flex;gap:4px}
+.bc i{display:block;width:10px;height:10px;border:1.5px solid var(--signal)}
+.bc i.on{background:var(--signal)}
+.ftr{position:absolute;left:96px;right:96px;bottom:0;height:64px;border-top:1px solid var(--hairline);display:flex;align-items:center;justify-content:space-between;gap:40px;font:400 16px var(--mono);color:var(--slate);z-index:2}
+.dark .ftr{border-color:var(--hairline-dark);color:var(--slate-light)}
+.ftr .pg{display:flex;align-items:center;gap:12px;white-space:nowrap;color:var(--ink);font-weight:500}
+.dark .ftr .pg{color:var(--paper)}
+.ftr .pg svg{width:24px;height:24px}
+.ftr .pg span{color:var(--slate);font-weight:400} .dark .ftr .pg span{color:var(--slate-light)}
+
+/* type */
+.title{position:absolute;left:96px;top:96px;font:600 68px/1.06 var(--display);letter-spacing:-.025em;z-index:2}
+.title .mute{color:var(--slate)}
+.sub{font:400 24px/1.45 var(--body);color:var(--slate)}
+.lab{font:500 18px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--slate);display:flex;align-items:center;gap:12px}
+.lab b{color:var(--signal-ink);font-weight:500}
+.on-ink .lab{color:var(--slate-light)} .on-ink .lab b{color:var(--signal)}
+.tag{font:400 16px var(--mono);color:var(--slate);letter-spacing:0;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;vertical-align:middle}
+.tag::before{content:"";width:6px;height:6px;background:currentColor;opacity:.55;flex:none}
+.on-ink .tag,.dark .tag{color:var(--slate-light)}
+.mono{font-family:var(--mono)}
+.h3{font:600 26px/1.2 var(--display);letter-spacing:-.01em;text-wrap:balance}
+.p{font:400 22px/1.42 var(--body);color:var(--slate);text-wrap:pretty}
+.on-ink .p{color:var(--slate-light)}
+
+/* surfaces */
+.card{position:absolute;border:1px solid var(--hairline);border-radius:6px;background:#FBFAF6;padding:28px}
+.inkp{position:absolute;background:var(--ink);color:var(--paper);border-radius:6px;padding:32px;display:flex;flex-direction:column}
+.inkp .end{margin-top:auto}
+
+/* ---------- slide 1 ---------- */
+.s1 .one{position:absolute;left:96px;top:452px;font:600 100px/.98 var(--display);letter-spacing:-.035em;width:820px;z-index:2}
+.s1 .one em{font-style:normal;color:var(--signal)}
+.s1 .subl{position:absolute;left:96px;top:676px;width:640px;font:400 28px/1.4 var(--body);color:var(--slate-light);z-index:2}
+.s1 .subl i{color:var(--paper);font-style:italic}
+.s1 .kick{position:absolute;left:96px;top:800px;font:500 18px var(--mono);color:var(--paper);letter-spacing:.02em;display:flex;align-items:center;gap:14px;z-index:2}
+.s1 .facts{position:absolute;left:96px;top:868px;width:760px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;border-top:1px solid var(--hairline-dark);padding-top:22px;z-index:2}
+.s1 .facts .v{font:500 26px var(--mono);color:var(--paper);white-space:nowrap}
+.s1 .facts .k{font:400 18px/1.35 var(--body);color:var(--slate-light);margin:6px 0 8px}
+.s1 svg text{font-family:var(--mono);font-size:16px;fill:var(--slate-light)}
+
+/* ---------- slide 2 ---------- */
+.fm .num{font:500 18px var(--mono);letter-spacing:.08em;color:var(--signal-ink);text-transform:uppercase}
+.fm svg{display:block;margin:14px 0 14px}
+.fm .h3{margin-bottom:8px}
+.s2 svg text{font-family:var(--mono);font-size:16px;fill:var(--slate)}
+
+/* ---------- slide 3 ---------- */
+table.trk{border-collapse:collapse;width:100%;table-layout:fixed;font:400 16px/1.32 var(--body)}
+.trk th{font:500 16px/1.25 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--slate);text-align:left;padding:0 14px 10px 0;border-bottom:1px solid var(--ink);vertical-align:bottom}
+.trk td{padding:5px 16px 5px 0;border-bottom:1px solid var(--hairline);color:var(--slate);vertical-align:top}
+.trk td .ph{font-size:16px;padding:0 6px}
+.trk td.n{font:400 16px var(--mono);color:var(--slate)}
+.trk .org{font:600 17px/1.25 var(--display);color:var(--ink);margin-bottom:2px}
+.trk td.dec{font:500 16px/1.3 var(--mono);color:var(--ink)}
+.trk td.said{color:var(--ink)}
+.trk tr.next td{padding:10px 0;border-bottom:none}
+.trk tr.neg td.dec{color:var(--slate)}
+.trk tr.neg td.said{color:var(--slate)}
+.trk tr.exp td{border-top:1px solid var(--ink)}
+.trk tr.exp td.dec{color:var(--nir)}
+.hyp{display:grid;grid-template-columns:64px 1fr;gap:2px 16px;padding:13px 0;border-top:1px solid var(--hairline)}
+.hyp .k{font:600 34px var(--display);color:var(--ink);grid-row:span 3;line-height:1}
+.hyp .t{font:500 21px/1.3 var(--body);text-wrap:balance}
+.hyp .ev{font:400 17px/1.35 var(--body);color:var(--slate);text-wrap:pretty}
+.hyp .chip{justify-self:start;margin-top:6px}
+.chip{display:inline-block;font:500 16px var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:2px 10px;border-radius:4px}
+.chip.yes{background:var(--ink);color:var(--paper)}
+.chip.open{border:1.5px solid var(--slate);color:var(--slate);padding:1px 9px}
+.wcm{margin-top:14px}
+.wcm div{display:grid;grid-template-columns:118px 1fr;gap:12px;padding:8px 0;border-top:1px solid var(--hairline-dark);font:400 18px/1.35 var(--body);color:#D5DAE1}
+.wcm b{font:500 16px var(--mono);letter-spacing:.04em;color:var(--signal);font-weight:500;padding-top:2px}
+.wcm .ph{justify-self:start}
+
+/* ---------- slide 4 ---------- */
+.flow{position:absolute;left:96px;top:190px;width:1728px;height:236px}
+.st{position:absolute;top:0;width:252px}
+.st svg{display:block}
+.st .cap{margin-top:10px;font:400 19px/1.35 var(--body);color:var(--slate)}
+.st .cap b{display:block;font:500 16px var(--mono);letter-spacing:.08em;color:var(--ink);margin-bottom:4px;font-weight:500}
+.st .cap b i{font-style:normal;color:var(--signal-ink)}
+table.spec{border-collapse:collapse;width:100%}
+.spec td{border-top:1px solid var(--hairline);height:30px;padding:0;vertical-align:middle}
+.spec td:first-child{font:400 18px var(--body);color:var(--slate);width:200px}
+.spec td:last-child{font:500 18px var(--mono);color:var(--ink)}
+.s4 svg text{font-family:var(--mono);font-size:16px;fill:var(--slate)}
+.mx{border-collapse:collapse;width:100%}
+.mx th{font:500 16px/1.25 var(--mono);color:var(--slate);text-align:center;vertical-align:bottom;padding:0 4px 10px;border-bottom:1px solid var(--ink);letter-spacing:0}
+.mx th:first-child{text-align:left;padding-left:0}
+.mx td{height:50px;border-bottom:1px solid var(--hairline);text-align:center;vertical-align:middle}
+.mx td:first-child{text-align:left;font:500 19px/1.2 var(--body);color:var(--ink);padding-left:0}
+.mx td:first-child small{display:block;font:400 16px var(--mono);color:var(--slate);margin-top:2px}
+.mx tr.us td{background:rgba(255,77,46,.09);border-bottom:2px solid var(--signal)}
+.mx tr.us td:first-child{font-weight:700;color:var(--signal-ink);box-shadow:inset 4px 0 0 var(--signal);padding-left:14px}
+.mx svg{width:26px;height:26px;display:inline-block;vertical-align:middle}
+.rm{position:absolute;display:grid;grid-template-columns:repeat(4,1fr)}
+.rm .n{position:relative;padding-top:26px;padding-right:20px}
+.rm .n::before{content:"";position:absolute;left:0;right:0;top:7px;height:2px;background:var(--hairline)}
+.rm .n::after{content:"";position:absolute;left:0;top:0;width:16px;height:16px;background:var(--paper);border:2px solid var(--ink)}
+.rm .n.done::after{background:var(--ink)}
+.rm .n.beach::after{background:var(--signal);border-color:var(--signal)}
+.rm .v{font:600 21px var(--display);letter-spacing:-.005em}
+.rm .v span{font:500 18px var(--mono);color:var(--signal-ink);margin-right:8px}
+.rm .d{font:400 18px/1.3 var(--body);color:var(--slate);margin-top:2px}
+
+/* ---------- slide 5 ---------- */
+.s5 svg text{font-family:var(--mono);font-size:16px;fill:var(--slate)}
+.tl{display:grid;grid-template-columns:1fr 1fr 1fr .6fr;margin-top:24px}
+.tl .ev{position:relative;padding-right:22px}
+.tl .ev::before{content:"";position:absolute;left:0;right:0;top:36px;height:2px;background:var(--ink)}
+.tl .ev::after{content:"";position:absolute;left:0;top:29px;width:16px;height:16px;background:var(--ink)}
+.tl .d{font:500 16px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--slate);margin-bottom:44px}
+.tl .t{font:600 21px/1.3 var(--body);margin-bottom:10px;text-wrap:balance;min-height:82px}
+.tl .key .d{color:var(--signal-ink)} .tl .key::after{background:var(--signal);width:18px;height:18px;top:28px}
+.tl .next::before{background:none;border-top:2px dashed var(--ink);height:0}
+.tl .next::after{background:var(--paper);border:2px dashed var(--ink)}
+.tile{position:absolute;border:1px solid var(--hairline);border-radius:6px;background:#FBFAF6;padding:22px 24px;display:grid;grid-template-columns:56px 1fr;gap:4px 16px;align-items:start}
+.tile svg{grid-row:span 2}
+.tile .h3{font-size:24px}
+.tile .p{font-size:19px}
+.team{position:absolute;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.tm{border-top:1px solid var(--ink);padding-top:20px}
+.tm .av{width:68px;height:68px;border-radius:50%;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;font:600 24px var(--display);letter-spacing:.02em;margin-bottom:14px}
+.tm .av.pend{background:transparent;border:1.5px dashed #8B95A3;color:#8B95A3;font:400 30px var(--mono)}
+/* photo option: <div class="av photo"><img src="photos/xx.jpg"></div> */
+.tm .av.photo{overflow:hidden;background:var(--paper-2)} .tm .av.photo img{width:100%;height:100%;object-fit:cover}
+.tm .nm{font:600 22px/1.2 var(--display)}
+.tm .rl{font:400 18px/1.38 var(--body);color:var(--slate);margin-top:6px}
+.tm .ph{font-size:16px;display:inline-block;margin-top:6px;white-space:normal}
+.chk{list-style:none;margin-top:18px}
+.prog{display:flex;gap:4px;margin-right:6px}
+.prog i{display:block;width:12px;height:12px;border:1.5px solid var(--signal)}
+.prog i.on{background:var(--signal)}
+.chk li{display:flex;gap:16px;align-items:flex-start;font:400 22px/1.3 var(--body);padding:9px 0;border-top:1px solid var(--hairline-dark)}
+.chk li::before{content:"";flex:none;width:16px;height:16px;border:2px solid var(--signal);margin-top:6px}
+</style></head>
+<body>
+
+<!-- shared symbols -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="icon" viewBox="0 0 48 48"><rect x="6" y="20" width="22" height="22" fill="#FF4D2E"/><path d="M33 15L42 6" stroke="#FF4D2E" stroke-width="4.5" stroke-linecap="square"/></symbol>
+    <symbol id="ok" viewBox="0 0 26 26"><path d="M5 13.5l5.2 5.2L21.5 7" fill="none" stroke="#0B0F14" stroke-width="2.6" stroke-linecap="square"/></symbol>
+    <symbol id="okS" viewBox="0 0 26 26"><rect x="1" y="1" width="24" height="24" fill="#FF4D2E"/><path d="M6 13.5l4.6 4.6L20 8.2" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="square"/></symbol>
+    <symbol id="no" viewBox="0 0 26 26"><path d="M8 8l10 10M18 8L8 18" stroke="#8B95A3" stroke-width="2" stroke-linecap="square"/></symbol>
+    <symbol id="part" viewBox="0 0 26 26"><circle cx="13" cy="13" r="8" fill="none" stroke="#0B0F14" stroke-width="2"/><path d="M13 5a8 8 0 0 1 0 16z" fill="#0B0F14"/></symbol>
+    <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#FF4D2E" opacity=".28"/><rect width="3.2" height="8" fill="#FF4D2E"/></pattern>
+  </defs>
+</svg>
+
+<!-- =================================================================== 1 · IDEA -->
+<section class="slide dark s1" data-n="1">
+  <svg class="full" id="hero" viewBox="0 0 1920 1080"></svg>
+  <header class="hdr"><span><b>01</b> — Idea</span><span class="bc" data-code="00001"></span><span class="line"></span><span>Glint · Y-Prize 2026–27 · Phase 1</span></header>
+
+  <svg class="abs" style="left:90px;top:212px;z-index:2" width="330" height="183" viewBox="-6 -30 412 228" aria-label="glint">
+    <g fill="none" stroke="#F6F4EF" stroke-width="20"><circle cx="50" cy="90" r="40"/><path d="M90 40V150A30 30 0 0 1 60 180H24"/><path d="M134 0V140"/><path d="M180 40V140"/><path d="M226 40V140M226 90A40 40 0 0 1 306 90V140"/><path d="M352 8V110A30 30 0 0 0 382 140H394"/><path d="M330 50H392"/></g>
+    <rect x="169" y="6" width="22" height="22" fill="#FF4D2E"/><path d="M197 0L215 -18" stroke="#FF4D2E" stroke-width="4" stroke-linecap="square"/>
+  </svg>
+
+  <h1 class="one">Every organoid gets a <em>voice.</em></h1>
+  <p class="subl">Light-powered sensor chips that sit <i>on</i> living 3D human tissue and report to an ordinary camera.</p>
+  <div class="kick"><span class="bc"><i class="on"></i><i></i><i class="on"></i><i class="on"></i><i></i></span>Y-Prize 2026–27 · Built on Penn's SPOTs technology</div>
+
+  <div class="facts">
+    <div><div class="v">150–300 µm</div><div class="k">sits on or under each organoid</div><span class="tag">Glint v1 design</span></div>
+    <div><div class="v">1 camera</div><div class="k">reads many chips in parallel</div><span class="tag">arXiv 2606.23916</span></div>
+    <div><div class="v">$0.0001–0.001</div><div class="k">added cost per chip</div><span class="tag">arXiv 2606.23916</span></div>
+  </div>
+
+  <footer class="ftr"><span>Sources: SPOTs (Submillimeter Polymer Optical Transmitters), Miskin &amp; Campbell, Penn Engineering — arXiv 2606.23916, Jun 2026 · Patent app. 63/908,097</span><span class="pg"><svg><use href="#icon"/></svg>01 <span>/ 05</span></span></footer>
+</section>
+
+<!-- =================================================================== 2 · PROBLEM -->
+<section class="slide s2" data-n="2">
+  <header class="hdr"><span><b>02</b> — Problem</span><span class="bc" data-code="00010"></span><span class="line"></span><span>Glint · Y-Prize 2026–27 · Phase 1</span></header>
+  <h2 class="title">Organoids are replacing animal tests.<br><span class="mute">But every one is a black box.</span></h2>
+  <p class="sub abs" style="left:96px;top:262px">The FDA's Roadmap to Reducing Animal Testing explicitly names organoids and organ-chips. <span class="tag">FDA 2025</span></p>
+
+  <svg class="full" id="xsec" viewBox="0 0 1920 1080"></svg>
+
+  <div class="card fm" style="left:96px;top:326px;width:560px;height:316px">
+    <div class="num">01 · Destroy</div>
+    <svg width="504" height="92" viewBox="0 0 504 92" id="fm1"></svg>
+    <div class="h3">The standard viability assay lyses the sample.</div>
+    <div class="p">CellTiter-Glo 3D gives one reading — then the organoid is gone.</div>
+  </div>
+  <div class="card fm" style="left:96px;top:666px;width:560px;height:316px">
+    <div class="num">02 · Surface-only</div>
+    <svg width="504" height="92" viewBox="0 0 504 92" id="fm2"></svg>
+    <div class="h3">Imaging sees only the surface.</div>
+    <div class="p">Tissue scatters light. Whole-well readouts average it all — they can't tell core from rim.</div>
+  </div>
+  <div class="card fm" style="left:1264px;top:326px;width:560px;height:316px">
+    <div class="num">03 · Scarce</div>
+    <svg width="504" height="92" viewBox="0 0 504 92" id="fm3"></svg>
+    <div class="h3">Patient-derived tumor organoids are scarce.</div>
+    <div class="p">Destroying them for a single time point is the costliest habit in the workflow.</div>
+  </div>
+  <div class="inkp on-ink" style="left:1264px;top:666px;width:560px;height:316px">
+    <div class="lab">Electrodes don't fix it</div>
+    <svg width="496" height="96" viewBox="0 0 496 96" style="margin-top:20px;display:block" aria-label="MEA plate touches only the bottom; mesh MEA wires one organoid">
+      <!-- MEA plate: contact only at the bottom -->
+      <path d="M0 80H120" stroke="#A3ACB8" stroke-width="2"/>
+      <g fill="#5B6573"><rect x="4" y="74" width="9" height="5"/><rect x="20" y="74" width="9" height="5"/><rect x="84" y="74" width="9" height="5"/><rect x="100" y="74" width="9" height="5"/></g>
+      <circle cx="56" cy="46" r="31" fill="#F2B8A0"/><circle cx="56" cy="46" r="13" fill="#2B1D1F"/>
+      <g fill="#FF4D2E"><rect x="36" y="74" width="9" height="5"/><rect x="52" y="74" width="9" height="5"/><rect x="68" y="74" width="9" height="5"/></g>
+      <text x="134" y="44" style="font:500 18px 'JetBrains Mono';fill:#F6F4EF">MEA plate</text>
+      <text x="134" y="68" style="font:400 17px 'JetBrains Mono';fill:#A3ACB8">bottom only</text>
+      <!-- mesh MEA: wired, one at a time -->
+      <g transform="translate(18 0)">
+      <circle cx="262" cy="46" r="31" fill="#F2B8A0"/><circle cx="262" cy="46" r="13" fill="#2B1D1F"/>
+      <g fill="none" stroke="#C3CAD4" stroke-width="1.4"><path d="M234 32C254 22 272 40 294 30 L316 40"/><path d="M232 46C252 38 272 56 293 46 L316 46"/><path d="M234 60C254 52 272 70 294 62 L316 52"/></g>
+      <rect x="316" y="36" width="10" height="20" fill="#A3ACB8"/>
+      <text x="342" y="44" style="font:500 18px 'JetBrains Mono';fill:#F6F4EF">mesh MEA</text>
+      <text x="342" y="68" style="font:400 17px 'JetBrains Mono';fill:#A3ACB8">one at a time</text>
+      </g>
+    </svg>
+    <div class="end" style="height:1px;background:var(--hairline-dark);margin-bottom:18px"></div>
+    <div class="h3" style="font-size:25px;line-height:1.3">Missing: a quantitative readout that <span style="color:var(--signal)">doesn't destroy</span>, in every well, over time.</div>
+  </div>
+
+  <footer class="ftr"><span>Sources: FDA, Roadmap to Reducing Animal Testing in Preclinical Safety Studies (Apr 2025)</span><span class="pg"><svg><use href="#icon"/></svg>02 <span>/ 05</span></span></footer>
+</section>
+
+<!-- =================================================================== 3 · CUSTOMER DISCOVERY -->
+<section class="slide s3" data-n="3">
+  <header class="hdr"><span><b>03</b> — Customer discovery</span><span class="bc" data-code="00011"></span><span class="line"></span><span>Glint · Y-Prize 2026–27 · Phase 1</span></header>
+  <h2 class="title">Who feels this pain — and would pay to fix it?</h2>
+  <p class="sub abs" style="left:96px;top:184px">Eight conversations so far: two cancer centers, two research institutes, two academic cell labs, an IVF clinic and the SPOTs co-inventor.</p>
+
+  <div class="abs" style="left:96px;top:256px;width:1144px">
+    <div class="lab" style="justify-content:space-between"><span>Interview tracker</span><span style="display:flex;align-items:center;gap:12px;letter-spacing:0;text-transform:none;color:var(--ink)"><span class="prog" id="prog"></span><span style="font:500 20px var(--mono)">n = 8 interviews</span><span class="tag">goal 25+ · Feb 1</span></span></div>
+    <table class="trk" style="margin-top:14px">
+      <colgroup><col style="width:36px"><col style="width:292px"><col style="width:238px"><col style="width:172px"><col></colgroup>
+      <thead><tr><th>#</th><th>Organization · role</th><th>Top pain</th><th>Changes a<br>decision?</th><th>What they said</th></tr></thead>
+      <tbody id="trk"></tbody>
+    </table>
+  </div>
+
+  <div class="abs" style="left:96px;top:872px;width:1144px;display:grid;grid-template-columns:96px 1fr;gap:0 8px">
+    <svg width="80" height="64" viewBox="0 0 80 64"><rect x="0" y="0" width="30" height="30" fill="#FF4D2E"/><path d="M30 30 L16 60" stroke="#FF4D2E" stroke-width="8"/><rect x="42" y="0" width="30" height="30" fill="#FF4D2E"/><path d="M72 30 L58 60" stroke="#FF4D2E" stroke-width="8"/></svg>
+    <div>
+      <p style="font:500 30px/1.22 var(--display);letter-spacing:-.015em;text-wrap:balance"><span style="color:var(--slate)">I think it would be hard.</span> But if it existed, it would be super valuable to us.</p>
+      <div style="margin-top:14px;font:400 18px var(--mono);color:var(--slate)">— Pedram Bayat, researcher, Goodman Lab of Immunology</div>
+    </div>
+  </div>
+
+  <div class="abs" style="left:1264px;top:256px;width:560px">
+    <div class="lab">Hypothesis scorecard</div>
+    <div style="margin-top:14px;border-bottom:1px solid var(--hairline)">
+      <div class="hyp"><div class="k">H1</div><div class="t">The pain is top-3 for ≥ 50% of interviewees.</div><div class="ev">6 of 7 potential customers described it; the microscopy-only lab did not. Rank not yet asked.</div><span class="chip yes">Supported · 6 / 7</span></div>
+      <div class="hyp"><div class="k">H2</div><div class="t">An internal readout would change a real decision.</div><div class="ev">Weill Cornell: 1 organoid per drug test, if accuracy is proven.</div><span class="chip yes">Supported · conditional</span></div>
+      <div class="hyp"><div class="k">H3</div><div class="t">Willingness to pay exceeds current per-well spend.</div><div class="ev">Only the IVF clinic said they would pay. No price data yet.</div><span class="chip open">Open</span></div>
+    </div>
+  </div>
+  <div class="inkp on-ink" style="left:1264px;top:738px;width:560px;height:244px;padding:22px 30px">
+    <div class="lab">What changed our mind</div>
+    <div class="wcm">
+      <div><b>We believed</b><span>we could read a chip in the core.</span></div>
+      <div><b>We heard</b><span>accuracy must be proven; microscopy-only labs don’t need it; inventor: reading past ~100&nbsp;µm is untested.</span></div>
+      <div><b>So we</b><span>go surface-first (v1); the core is v2.</span></div>
+    </div>
+  </div>
+
+  <footer class="ftr"><span>Sources: Glint customer-discovery interviews, <span class="ph" style="font-size:16px">[dates]</span> · M. Campbell, email, Nov 2026 · paraphrased from interview notes unless in quotes</span><span class="pg"><svg><use href="#icon"/></svg>03 <span>/ 05</span></span></footer>
+</section>
+
+<!-- =================================================================== 4 · FEASIBILITY -->
+<section class="slide s4" data-n="4">
+  <header class="hdr"><span><b>04</b> — Technological feasibility</span><span class="bc" data-code="00100"></span><span class="line"></span><span>Glint · Y-Prize 2026–27 · Phase 1</span></header>
+  <h2 class="title" style="font-size:64px;top:92px">Proven physics. We bring it to the plate.</h2>
+
+  <div class="flow" id="flow"></div>
+
+  <!-- spec sheet -->
+  <div class="abs" style="left:96px;top:446px;width:560px">
+    <div class="lab" style="justify-content:space-between"><span>SPOTs spec sheet</span><span class="tag">arXiv 2606.23916</span></div>
+    <table class="spec" style="margin-top:12px">
+      <tr><td>Electrochromic film</td><td>30–60 nm PEDOT:PSS on Pt</td></tr>
+      <tr><td>Drive</td><td>±1 V → reflectance change</td></tr>
+      <tr><td>Pixel size</td><td>3×3 µm – 300 µm</td></tr>
+      <tr><td>Light-powered CMOS</td><td>55 nm · 150×200 µm temp. chip</td></tr>
+      <tr><td>Switching</td><td>~40 µs rise · ~110 µs fall</td></tr>
+      <tr><td>Critical frequency</td><td>~10 kHz</td></tr>
+      <tr><td>Most efficient</td><td>150–300 Hz · 20–90 pJ/bit</td></tr>
+      <tr><td>Endurance</td><td>&gt; 1.1 billion cycles</td></tr>
+      <tr><td>Medium</td><td>saline (needs electrolyte)</td></tr>
+      <tr><td>Added cost</td><td>~$0.0001–0.001 / chip</td></tr>
+      <tr style="border-bottom:1px solid var(--hairline)"><td>IP</td><td>Patent app. 63/908,097</td></tr>
+    </table>
+  </div>
+
+  <!-- comparison matrix -->
+  <div class="abs" style="left:680px;top:446px;width:560px">
+    <div class="lab" style="justify-content:space-between"><span>Why SPOTs</span><span class="tag">team assessment</span></div>
+    <table class="mx" style="margin-top:12px">
+      <thead><tr><th style="width:196px"></th><th>works<br>&lt; 1 mm</th><th>CMOS-<br>native<br>&amp; ~1¢</th><th>electrical<br>sensing</th><th>plate-scale<br>parallel<br>readout</th></tr></thead>
+      <tr><td>RF coils</td><td><svg><use href="#no"/></svg></td><td><svg><use href="#no"/></svg></td><td><svg><use href="#ok"/></svg></td><td><svg><use href="#no"/></svg></td></tr>
+      <tr><td>µLED uplink<small>e.g. Cornell MOTE</small></td><td><svg><use href="#ok"/></svg></td><td><svg><use href="#no"/></svg></td><td><svg><use href="#ok"/></svg></td><td><svg><use href="#part"/></svg></td></tr>
+      <tr><td>Optode dyes</td><td><svg><use href="#ok"/></svg></td><td><svg><use href="#no"/></svg></td><td><svg><use href="#no"/></svg></td><td><svg><use href="#ok"/></svg></td></tr>
+      <tr><td>Wired 3D MEAs</td><td><svg><use href="#ok"/></svg></td><td><svg><use href="#no"/></svg></td><td><svg><use href="#ok"/></svg></td><td><svg><use href="#no"/></svg></td></tr>
+      <tr class="us"><td>Glint SPOT chiplet</td><td><svg><use href="#okS"/></svg></td><td><svg><use href="#okS"/></svg></td><td><svg><use href="#okS"/></svg></td><td><svg><use href="#okS"/></svg></td></tr>
+    </table>
+    <div style="margin-top:10px;display:flex;gap:22px;font:400 16px var(--mono);color:var(--slate)"><span style="display:flex;gap:6px;align-items:center"><svg width="20" height="20"><use href="#part"/></svg> partial / not shown at plate scale</span></div>
+  </div>
+
+  <!-- roadmap -->
+  <div class="abs" style="left:96px;top:832px;width:1144px">
+    <div class="lab" style="margin-bottom:14px">Roadmap — surface first, then the core</div>
+    <div class="rm" style="position:relative;width:1144px">
+      <div class="n done"><div class="v"><span>v0</span>Temperature</div><div class="d">existing chip · demo</div></div>
+      <div class="n beach"><div class="v"><span>v1</span>Surface viability</div><div class="d">impedance · beachhead: tumor organoid screening</div></div>
+      <div class="n"><div class="v"><span>v2</span>Into the core</div><div class="d">wavelength-shifted SPOT · untested</div></div>
+      <div class="n"><div class="v"><span>v3</span>More sensors</div><div class="d">O<sub style="font-size:.9em">2</sub> / pH · electrophysiology</div></div>
+    </div>
+  </div>
+
+  <!-- insight + quote -->
+  <div class="inkp on-ink" style="left:1264px;top:446px;width:560px;height:282px;padding:24px 32px">
+    <div class="lab"><b>Key insight</b></div>
+    <p style="margin-top:10px;font:500 22px/1.34 var(--display);letter-spacing:-.005em;text-wrap:pretty">SPOTs' trade-offs (bandwidth, energy per bit) vanish in vitro: light is abundant, the camera is close, and data rates are tiny. <span style="color:var(--signal)">Its&nbsp;strengths&nbsp;dominate.</span></p>
+    <p style="margin-top:14px;font:400 18px/1.38 var(--body);color:#D5DAE1;text-wrap:pretty">“The chips can sense plenty of things — you just need to connect the right kind of sensor to them.”</p><div style="margin-top:6px;font:400 16px var(--mono);color:var(--slate-light)">— Matt Campbell, SPOTs co-inventor (email)</div>
+  </div>
+
+  <!-- MC placeholder chart -->
+  <div class="abs" style="left:1264px;top:746px;width:560px;height:240px;border:1px solid var(--hairline);border-radius:6px;background:#FBFAF6">
+    <svg width="560" height="238" viewBox="0 0 560 238" id="mc"></svg>
+  </div>
+
+  <footer class="ftr"><span>Sources: SPOTs — arXiv 2606.23916 (Jun 2026) · Patent app. 63/908,097 · M. Campbell, email, Nov 2026 · matrix: Glint team assessment</span><span class="pg"><svg><use href="#icon"/></svg>04 <span>/ 05</span></span></footer>
+</section>
+
+<!-- =================================================================== 5 · MARKET + TEAM -->
+<section class="slide s5" data-n="5">
+  <header class="hdr"><span><b>05</b> — Market + team</span><span class="bc" data-code="00101"></span><span class="line"></span><span>Glint · Y-Prize 2026–27 · Phase 1</span></header>
+  <h2 class="title">Biology is moving to 3D. The readout hasn't.</h2>
+
+  <!-- market -->
+  <div class="abs" style="left:96px;top:208px;width:852px">
+    <div class="lab">Market · 2025 estimates <span style="text-transform:none;letter-spacing:0">— different analysts, not additive</span></div>
+    <svg width="852" height="250" viewBox="0 0 852 250" id="mkt" style="margin-top:12px;display:block"></svg>
+  </div>
+
+  <!-- why now -->
+  <div class="abs" style="left:972px;top:208px;width:852px">
+    <div class="lab">Why now</div>
+    <div class="tl">
+      <div class="ev"><div class="d">Apr 2025</div><div class="t">FDA Roadmap to Reducing Animal Testing</div><span class="tag">FDA 2025</span></div>
+      <div class="ev"><div class="d">May–Jun 2026</div><div class="t">FDA year-one report and guidance</div><span class="tag">FDA 2026</span></div>
+      <div class="ev key"><div class="d">Jun 2026</div><div class="t">SPOTs published, Penn Engineering</div><span class="tag">arXiv 2606.23916</span></div>
+      <div class="ev next"><div class="d">Feb 1</div><div class="t">Y-Prize finale</div></div>
+    </div>
+    <p class="p" style="font-size:19px;margin-top:22px">Regulatory pull and the enabling technology arrived within 14 months of each other.</p>
+  </div>
+
+  <!-- business model -->
+  <div class="abs" style="left:96px;top:494px;width:1728px">
+    <div class="lab">Business model</div>
+  </div>
+  <div class="tile" style="left:96px;top:530px;width:372px;height:136px">
+    <svg width="56" height="56" viewBox="0 0 56 56"><rect x="1" y="1" width="54" height="54" rx="4" fill="none" stroke="#0B0F14" stroke-width="2"/><rect x="18" y="18" width="20" height="20" fill="#FF4D2E"/><path d="M8 28h6M42 28h6M28 8v6M28 42v6" stroke="#0B0F14" stroke-width="2"/></svg>
+    <div class="h3">Consumable chips</div><div class="p">Per well, every plate — recurring revenue.</div>
+  </div>
+  <div class="tile" style="left:512px;top:530px;width:372px;height:136px">
+    <svg width="56" height="56" viewBox="0 0 56 56"><rect x="6" y="4" width="44" height="8" fill="none" stroke="#0B0F14" stroke-width="2"/><circle cx="16" cy="8" r="1.8" fill="#B23A6B"/><circle cx="28" cy="8" r="1.8" fill="#B23A6B"/><circle cx="40" cy="8" r="1.8" fill="#B23A6B"/><rect x="14" y="22" width="28" height="18" rx="3" fill="none" stroke="#0B0F14" stroke-width="2"/><circle cx="28" cy="31" r="5" fill="none" stroke="#0B0F14" stroke-width="2"/><path d="M4 52h48" stroke="#0B0F14" stroke-width="2"/></svg>
+    <div class="h3">Reader</div><div class="p">Camera + NIR panel over a standard plate.</div>
+  </div>
+  <div class="tile" style="left:928px;top:530px;width:372px;height:136px">
+    <svg width="56" height="56" viewBox="0 0 56 56"><rect x="1" y="1" width="54" height="54" rx="4" fill="none" stroke="#0B0F14" stroke-width="2"/><path d="M8 40 L16 40 L16 30 L24 30 L24 36 L32 36 L32 20 L40 20 L40 26 L48 26" fill="none" stroke="#0B0F14" stroke-width="2"/><rect x="8" y="10" width="5" height="5" fill="#0B0F14"/><rect x="15" y="10" width="5" height="5" fill="none" stroke="#0B0F14" stroke-width="1.5"/><rect x="22" y="10" width="5" height="5" fill="#0B0F14"/></svg>
+    <div class="h3">Software</div><div class="p">Decoding, per-well analytics, export.</div>
+  </div>
+  <svg class="full" id="bmarrows" viewBox="0 0 1920 1080"></svg>
+  <div class="abs" style="left:1344px;top:530px;width:480px;height:136px;border-left:2px solid var(--ink);padding:6px 0 0 24px">
+    <div class="lab">Precedent</div>
+    <p style="margin-top:10px;font:400 22px/1.4 var(--body)">Agilent acquired ACEA (xCELLigence label-free cell analysis) for <b class="mono" style="font-weight:500">$250M</b>, 2018.</p>
+    <span class="tag" style="margin-top:6px">Agilent press release, 2018</span>
+  </div>
+
+  <!-- team -->
+  <div class="abs" style="left:96px;top:698px;width:1144px">
+    <div class="lab">Team</div>
+  </div>
+  <div class="team" style="left:96px;top:736px;width:1144px">
+    <div class="tm"><div class="av">CM</div><div class="nm">Carlos Morett Ledesma</div><div class="rl">Physics simulation (Geant4 / Monte Carlo) · ML &amp; decoding software · founder, Tláloc (water-network AI)</div></div>
+    <div class="tm"><div class="av">MA</div><div class="nm">Mohammad “Mo” Alkhayyat</div><div class="rl">Neuroscience</div><span class="ph">[ROLE / BACKGROUND]</span></div>
+    <div class="tm"><div class="av pend">+</div><div class="nm">Inventor advisors</div><span class="ph">[Inventor advisors — pending]</span></div>
+    <div class="tm"><div class="av pend">+</div><div class="nm">Biology advisor</div><span class="ph">[Biology advisor — pending]</span></div>
+  </div>
+
+  <!-- next steps -->
+  <div class="inkp on-ink" style="left:1264px;top:698px;width:560px;height:288px;padding:28px 32px">
+    <div class="lab"><b>Next</b> → Feb 1 finale</div>
+    <ul class="chk">
+      <li>25+ interviews · ask rank &amp; price</li>
+      <li>Monte Carlo light-budget model</li>
+      <li>Bench test: read a SPOT through tissue</li>
+      <li>Licensing talk · Penn Center for Innovation</li>
+    </ul>
+  </div>
+
+  <footer class="ftr"><span>Sources: market sizes <span class="ph" style="font-size:16px">[SRC — analyst reports]</span> · FDA 2025, 2026 · arXiv 2606.23916 · Agilent press release (2018)</span><span class="pg"><svg><use href="#icon"/></svg>05 <span>/ 05</span></span></footer>
+</section>
+
+<script>
+/* ---------- helpers ---------- */
+const NS='http://www.w3.org/2000/svg';
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e}
+function txt(parent,x,y,s,attrs={}){const t=el('text',Object.assign({x,y},attrs),parent);t.textContent=s;return t}
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const C={ink:'#0B0F14',paper:'#F6F4EF',signal:'#FF4D2E',signalInk:'#C2331A',nir:'#B23A6B',nirL:'#E58AB0',tissue:'#F2B8A0',slate:'#5B6573',slateL:'#A3ACB8',hair:'#D9D4CA',hairD:'#2A323D'};
+function grad(defs,id,type,attrs,stops){const g=el(type,Object.assign({id},attrs),defs);stops.forEach(s=>el('stop',{offset:s[0],'stop-color':s[1],'stop-opacity':s[2]??1},g));return g}
+
+/* blink-code headers */
+document.querySelectorAll('.bc[data-code]').forEach(b=>{[...b.dataset.code].forEach(c=>{const i=document.createElement('i');if(c==='1')i.className='on';b.appendChild(i)})});
+
+/* cell packing inside a circle; returns [{x,y,r,d}] */
+function pack(cx,cy,R0,R1,rMin,rMax,tries,seed){
+  const rand=rng(seed),out=[];
+  for(let k=0;k<tries;k++){
+    const a=rand()*Math.PI*2, rr=Math.sqrt(R0*R0/(R1*R1)+(1-R0*R0/(R1*R1))*rand())*R1;
+    const x=cx+Math.cos(a)*rr,y=cy+Math.sin(a)*rr,r=rMin+rand()*(rMax-rMin);
+    if(rr+r*0.6>R1)continue;
+    let ok=true;for(const c of out){const dx=c.x-x,dy=c.y-y;if(dx*dx+dy*dy<(c.r+r)*(c.r+r)*0.82){ok=false;break}}
+    if(ok)out.push({x,y,r,d:rr/R1,a})
+  }
+  return out
+}
+function drawCells(g,cells,cx,cy,style){
+  cells.forEach(c=>{
+    const k=Math.max(.42,Math.sqrt(Math.max(0,1-c.d*c.d)));
+    const ang=Math.atan2(c.y-cy,c.x-cx)*180/Math.PI;
+    el('ellipse',{cx:c.x.toFixed(1),cy:c.y.toFixed(1),rx:(c.r*k).toFixed(1),ry:c.r.toFixed(1),transform:`rotate(${ang.toFixed(1)} ${c.x.toFixed(1)} ${c.y.toFixed(1)})`,
+      fill:style.fill,'fill-opacity':(style.fo[0]+style.fo[1]*c.d).toFixed(2),stroke:style.stroke,'stroke-width':style.sw,'stroke-opacity':(style.so[0]+style.so[1]*c.d).toFixed(2)},g);
+    if(style.nuc)el('circle',{cx:(c.x+(c.r*.15)).toFixed(1),cy:(c.y-(c.r*.1)).toFixed(1),r:(c.r*.28*k+.6).toFixed(1),fill:style.nuc,'fill-opacity':(.25+.35*c.d).toFixed(2)},g);
+  })
+}
+
+/* ================= SLIDE 1 HERO ================= */
+(function(){
+  const s=document.getElementById('hero'), defs=el('defs',{},s);
+  const OX=1390, OY=520, R=250;
+  grad(defs,'halo','radialGradient',{cx:.5,cy:.5,r:.5},[[0,C.tissue,.22],[.6,C.tissue,.08],[1,C.tissue,0]]);
+  grad(defs,'body','radialGradient',{cx:.5,cy:.5,r:.5,fx:.38,fy:.32},[[0,'#FBE3D6',.96],[.45,'#F2B8A0',.9],[.82,'#D98B7C',.86],[1,'#A85A63',.8]]);
+  grad(defs,'glow','radialGradient',{cx:.5,cy:.5,r:.5},[[0,C.signal,.95],[.18,C.signal,.55],[.45,C.signal,.16],[1,C.signal,0]]);
+  grad(defs,'ray','linearGradient',{x1:0,y1:0,x2:0,y2:1},[[0,C.nirL,0],[.35,C.nirL,.55],[1,C.nirL,.85]]);
+  grad(defs,'wedge','linearGradient',{x1:0,y1:0,x2:0,y2:1},[[0,C.nir,.0],[1,C.nir,.22]]);
+  grad(defs,'wellLit','radialGradient',{cx:.5,cy:.5,r:.5},[[0,C.signal,.9],[.5,C.signal,.35],[1,C.signal,0]]);
+  grad(defs,'shadow','radialGradient',{cx:.5,cy:.5,r:.5},[[0,'#000',.55],[1,'#000',0]]);
+
+  /* 96-well plate in perspective */
+  const g=el('g',{},s);
+  const pitch=104, cols=12, rows=8, sFar=.40, sNear=.70, yFar=650, yNear=930;
+  const K=(yNear-yFar)/(sNear-sFar), yH=yFar-K*sFar;
+  const P=(c,rw)=>{const sc=sFar+(sNear-sFar)*(rw/(rows-1));return{x:OX+(c-(cols-1)/2)*pitch*sc,y:yH+K*sc,s:sc}};
+  // outline (pad half a pitch)
+  const corner=(c,rw)=>{const sc=sFar+(sNear-sFar)*(rw/(rows-1));return[OX+(c-(cols-1)/2)*pitch*sc,yH+K*sc]};
+  const pts=[corner(-0.9,-0.9),corner(cols-0.1,-0.9),corner(cols-0.1,rows-0.1),corner(-0.9,rows-0.1)];
+  el('path',{d:'M'+pts.map(p=>p.map(v=>v.toFixed(1)).join(' ')).join('L')+'Z',fill:'#10161D',stroke:C.hairD,'stroke-width':1.5},g);
+  const lit=new Set(['2,3','5,6','9,2','3,6','10,5','7,1']);
+  for(let rw=0;rw<rows;rw++)for(let c=0;c<cols;c++){
+    const p=P(c,rw), rx=pitch*p.s*.36, ry=rx*(.30+.28*(p.s-sFar)/(sNear-sFar));
+    const op=(.35+.55*rw/(rows-1)).toFixed(2);
+    el('ellipse',{cx:p.x.toFixed(1),cy:p.y.toFixed(1),rx:rx.toFixed(1),ry:ry.toFixed(1),fill:'#0B0F14',stroke:'#3A4452','stroke-width':1.2,'stroke-opacity':op},g);
+    if(lit.has(c+','+rw)){
+      el('ellipse',{cx:p.x.toFixed(1),cy:p.y.toFixed(1),rx:(rx*1.9).toFixed(1),ry:(ry*2.2).toFixed(1),fill:'url(#wellLit)',opacity:.55},g);
+      el('rect',{x:(p.x-3.5).toFixed(1),y:(p.y-3.5).toFixed(1),width:7,height:7,fill:C.signal},g);
+    }
+  }
+  txt(g,corner(cols-0.1,rows-0.1)[0]-6,corner(cols-0.1,rows-0.1)[1]-14,'96-well plate',{'text-anchor':'end'});
+
+  /* NIR: LED panel + rays */
+  const panelY=118, panelW=560;
+  const nir=el('g',{},s);
+  el('path',{d:`M${OX-panelW/2} ${panelY+10} L${OX+panelW/2} ${panelY+10} L${OX+R*.92} ${OY-60} L${OX-R*.92} ${OY-60}Z`,fill:'url(#wedge)'},nir);
+  el('rect',{x:OX-panelW/2,y:panelY,width:panelW,height:10,fill:'#1B222C',stroke:'#3A4452','stroke-width':1},nir);
+  for(let i=0;i<14;i++)el('rect',{x:OX-panelW/2+14+i*(panelW-28)/13-3,y:panelY+2,width:6,height:6,fill:C.nirL,opacity:.9},nir);
+  txt(nir,OX-panelW/2-14,panelY+11,'NIR LED panel',{'text-anchor':'end'});
+  for(let i=-4;i<=4;i++){
+    const sx=OX+i*62, sy=panelY+14, dx=sx-OX, dy=sy-OY, L=Math.hypot(dx,dy);
+    const ex=OX+dx/L*R*.985, ey=OY+dy/L*R*.985;
+    el('line',{x1:sx,y1:sy,x2:ex.toFixed(1),y2:ey.toFixed(1),stroke:'url(#ray)','stroke-width':i===0?2.4:1.5,opacity:1-Math.abs(i)*.08},nir);
+  }
+
+  /* organoid */
+  const og=el('g',{},s);
+  el('ellipse',{cx:OX,cy:OY+R*.98,rx:R*.95,ry:R*.17,fill:'url(#shadow)'},og);
+  el('circle',{cx:OX,cy:OY,r:R*1.32,fill:'url(#halo)'},og);
+  el('circle',{cx:OX,cy:OY,r:R,fill:'url(#body)'},og);
+  drawCells(og,pack(OX,OY,0,R-2,6.5,12.5,9000,7),OX,OY,{fill:'#FFF3EC',fo:[.10,.16],stroke:'#8C4A52',so:[.12,.42],sw:1.1,nuc:'#9C5560'});
+  el('circle',{cx:OX,cy:OY,r:R-1,fill:'none',stroke:'#FFE9DE','stroke-opacity':.35,'stroke-width':1.5},og);
+  el('path',{d:`M${OX-R*.80} ${OY-R*.42} A${R*.9} ${R*.9} 0 0 1 ${OX-R*.18} ${OY-R*.86}`,fill:'none',stroke:'#fff','stroke-opacity':.45,'stroke-width':3,'stroke-linecap':'round'},og);
+  // chip: v1 sits on the organoid's surface, facing the camera (co-inventor guidance: reads past ~100 µm untested)
+  const tha=-58*Math.PI/180, KX=OX+Math.cos(tha)*R*.95, KY=OY+Math.sin(tha)*R*.95;
+  el('circle',{cx:KX,cy:KY,r:78,fill:'url(#glow)'},og);
+  const kg=el('g',{transform:`translate(${KX.toFixed(1)} ${KY.toFixed(1)}) rotate(32)`},og);
+  el('rect',{x:-24,y:-24,width:48,height:48,fill:'#141A22',stroke:'#C9CFD8','stroke-width':2},kg);
+  el('rect',{x:-15,y:-15,width:20,height:20,fill:C.signal},kg);
+  el('rect',{x:9,y:5,width:8,height:12,fill:'#3B4654'},kg);  // solar cell
+  el('path',{d:'M-18 12h16M-18 17h16',stroke:'#5C6878','stroke-width':1.5},kg);
+
+  /* blink pulses -> camera */
+  const CX=1760, CY=200, ux=(CX-KX), uy=(CY-KY), UL=Math.hypot(ux,uy), u=[ux/UL,uy/UL];
+  const ang=Math.atan2(uy,ux)*180/Math.PI;
+  const code=[1,0,1,1,0,1,0,0,1,1], pg=el('g',{},s);
+  const t0=46, t1=UL-48;
+  code.forEach((b,i)=>{
+    const t=t0+i*(t1-t0)/(code.length-1), x=KX+u[0]*t, y=KY+u[1]*t, sz=14;
+    if(b)el('rect',{x:(x-sz/2).toFixed(1),y:(y-sz/2).toFixed(1),width:sz,height:sz,fill:C.signal},pg);
+    else el('rect',{x:(x-sz/2+1).toFixed(1),y:(y-sz/2+1).toFixed(1),width:sz-2,height:sz-2,fill:'none',stroke:C.signal,'stroke-width':1.5,'stroke-opacity':.7},pg);
+  });
+  // label for blink code
+  txt(pg,1824,302,"blink code",{fill:C.paper,'text-anchor':'end'});txt(pg,1824,324,"chip ID + reading",{'text-anchor':'end'});
+
+  /* camera glyph */
+  const cam=el('g',{transform:`translate(${CX} ${CY}) rotate(${ang.toFixed(1)})`},s);
+  el('rect',{x:0,y:-32,width:104,height:64,rx:8,fill:'#141A22',stroke:C.paper,'stroke-opacity':.8,'stroke-width':2},cam);
+  el('rect',{x:-26,y:-20,width:26,height:40,fill:'#141A22',stroke:C.paper,'stroke-opacity':.8,'stroke-width':2},cam);
+  el('line',{x1:-26,y1:-14,x2:-26,y2:14,stroke:C.signal,'stroke-width':3},cam);
+  el('rect',{x:22,y:-44,width:30,height:12,fill:'#141A22',stroke:C.paper,'stroke-opacity':.8,'stroke-width':2},cam);
+  txt(s,1824,104,"ordinary camera",{"text-anchor":"end",fill:C.paper});
+
+  /* chip leader */
+  const lg=el('g',{},s);
+  const lx=1104, ly=212;
+  el('path',{d:`M${(KX-22).toFixed(1)} ${(KY-22).toFixed(1)} L${lx+30} ${ly} H${lx-6}`,fill:'none',stroke:C.paper,'stroke-opacity':.55,'stroke-width':1},lg);
+  el('circle',{cx:KX-22,cy:KY-22,r:3,fill:C.paper},lg);
+  txt(lg,lx-14,ly+5,'chiplet · 150–300 µm',{'text-anchor':'end',fill:C.paper});
+  txt(lg,lx-14,ly+27,'on the surface · light in → data out',{'text-anchor':'end'});
+})();
+
+/* ================= SLIDE 2 ================= */
+(function(){
+  const s=document.getElementById('xsec'), defs=el('defs',{},s);
+  const X=960, Y=650, R=205;
+  grad(defs,'rim','radialGradient',{cx:.5,cy:.5,r:.5},[[0,'#E9A48E'],[.75,'#F2B8A0'],[1,'#F6CBB7']]);
+  grad(defs,'qz','radialGradient',{cx:.5,cy:.5,r:.5},[[0,'#B97B72'],[1,'#D99B88']]);
+  grad(defs,'core','radialGradient',{cx:.45,cy:.42,r:.6},[[0,'#3A2629'],[1,'#1A1214']]);
+  el('circle',{cx:X,cy:Y,r:R,fill:'url(#rim)'},s);
+  drawCells(s,pack(X,Y,146,R-1,7,12,5000,11),X,Y,{fill:'#FFF1EA',fo:[.25,.15],stroke:'#A6585C',so:[.3,.25],sw:1.1,nuc:'#A6585C'});
+  el('circle',{cx:X,cy:Y,r:144,fill:'url(#qz)'},s);
+  drawCells(s,pack(X,Y,86,142,6,10,3000,12),X,Y,{fill:'#F5D3C6',fo:[.08,.08],stroke:'#7E4447',so:[.25,.15],sw:1});
+  el('circle',{cx:X,cy:Y,r:84,fill:'url(#core)'},s);
+  const r=rng(5);for(let i=0;i<46;i++){const a=r()*6.283,d=Math.sqrt(r())*74;el('circle',{cx:(X+Math.cos(a)*d).toFixed(1),cy:(Y+Math.sin(a)*d).toFixed(1),r:(2+r()*5).toFixed(1),fill:'#5A3B3E',opacity:(.25+r()*.4).toFixed(2)},s)}
+  el('circle',{cx:X,cy:Y,r:94,fill:'none',stroke:C.signal,'stroke-width':2.5,'stroke-dasharray':'7 6'},s);
+  // curved zone labels
+  const arc=(id,rad,top)=>{const d=top?`M${X-rad} ${Y} A${rad} ${rad} 0 0 1 ${X+rad} ${Y}`:`M${X-rad} ${Y} A${rad} ${rad} 0 0 0 ${X+rad} ${Y}`;el('path',{id,d,fill:'none'},defs)};
+  arc('aRim',170,true); arc('aQz',124,false);
+  // vector halo band behind each curved label (keeps the PDF fully vector — no stroked text)
+  const band=(rb,midDeg,halfDeg,col)=>{const a1=(midDeg-halfDeg)*Math.PI/180,a2=(midDeg+halfDeg)*Math.PI/180;
+    el('path',{d:`M${(X+rb*Math.cos(a1)).toFixed(1)} ${(Y+rb*Math.sin(a1)).toFixed(1)} A${rb} ${rb} 0 0 1 ${(X+rb*Math.cos(a2)).toFixed(1)} ${(Y+rb*Math.sin(a2)).toFixed(1)}`,fill:'none',stroke:col,'stroke-width':26,'stroke-linecap':'round',opacity:.9},s)};
+  band(176,-90,42,'#F6CBB7'); band(118,90,50,'#D9A08F');
+  const tp=(id,str,fill)=>{const t=el('text',{'text-anchor':'middle',style:`font-family:"JetBrains Mono";font-size:17px;font-weight:700;letter-spacing:.14em;fill:${fill}`},s);const p=el('textPath',{href:'#'+id,startOffset:'50%'},t);p.textContent=str};
+  tp('aRim','PROLIFERATING RIM','#6E2F35');
+  tp('aQz','QUIESCENT ZONE','#4A2226');
+  txt(s,X,Y-6,'NECROTIC',{'text-anchor':'middle',style:'fill:#F6F4EF;font-family:"JetBrains Mono";font-size:17px;font-weight:700;letter-spacing:.14em'});
+  txt(s,X,Y+16,'CORE',{'text-anchor':'middle',style:'fill:#F6F4EF;font-family:"JetBrains Mono";font-size:17px;font-weight:700;letter-spacing:.14em'});
+  txt(s,X,Y+R+44,'the core: invisible to imaging, lost to lysis',{'text-anchor':'middle',style:'fill:#C2331A'});
+  txt(s,X,Y-R-30,'ORGANOID CROSS-SECTION',{'text-anchor':'middle',style:'fill:#5B6573;letter-spacing:.08em'});
+  // dashed connectors to the cards
+  [[656,484,X-R+10,Y-120],[656,824,X-R+10,Y+120],[1264,484,X+R-10,Y-120],[1264,824,X+R-10,Y+120]].forEach(c=>el('path',{d:`M${c[0]} ${c[1]}C${(c[0]+c[2])/2} ${c[1]} ${(c[0]+c[2])/2} ${c[3]} ${c[2]} ${c[3]}`,fill:'none',stroke:'#BDB6A9','stroke-width':1.5,'stroke-dasharray':'4 5'},s));
+
+  /* failure-mode mini illustrations (504x92) */
+  // fm1: intact -> lyse -> fragments -> 1 reading
+  let g=document.getElementById('fm1');
+  el('circle',{cx:40,cy:46,r:34,fill:'#F2B8A0'},g);el('circle',{cx:40,cy:46,r:14,fill:'#2B1D1F'},g);
+  el('path',{d:'M92 46H150M144 40l7 6-7 6',fill:'none',stroke:C.slate,'stroke-width':1.5},g);
+  txt(g,121,32,'lyse',{'text-anchor':'middle'});
+  const fr=rng(3);for(let i=0;i<26;i++){const a=fr()*6.283,d=8+fr()*36;const x=214+Math.cos(a)*d*1.25,y=46+Math.sin(a)*d*.8;const sz=4+fr()*9;el('path',{d:`M${x.toFixed(1)} ${y.toFixed(1)}l${sz.toFixed(1)} ${(-sz*.3).toFixed(1)}l${(-sz*.2).toFixed(1)} ${sz.toFixed(1)}z`,fill:i%4?'#F2B8A0':'#2B1D1F',opacity:.9},g)}
+  el('path',{d:'M282 46H340M334 40l7 6-7 6',fill:'none',stroke:C.slate,'stroke-width':1.5},g);
+  el('rect',{x:358,y:30,width:32,height:32,fill:C.ink},g);txt(g,374,51,'1',{'text-anchor':'middle',style:'fill:#F6F4EF'});
+  txt(g,402,44,'reading,',{style:'fill:#0B0F14'});txt(g,402,64,'then gone',{style:'fill:#C2331A'});
+  // fm2: light from the left only penetrates outer layers
+  g=document.getElementById('fm2');
+  const gd=el('defs',{},g);grad(gd,'pen','radialGradient',{cx:0,cy:.5,r:.62},[[0,'#FFFFFF',.95],[.45,'#FFFFFF',.4],[.7,'#FFFFFF',0]]);
+  el('circle',{cx:110,cy:46,r:42,fill:'#F2B8A0'},g);el('circle',{cx:110,cy:46,r:17,fill:'#2B1D1F'},g);
+  el('circle',{cx:110,cy:46,r:42,fill:'url(#pen)'},g);
+  for(let i=-2;i<=2;i++){const y=46+i*13, x2=110-Math.sqrt(42*42-(i*13)*(i*13));el('line',{x1:0,y1:y,x2:x2.toFixed(1),y2:y,stroke:C.nir,'stroke-width':1.5},g);const zz=rng(20+i);let px=x2,py=y,d=`M${px.toFixed(1)} ${py}`;for(let k=0;k<3;k++){px+=4+zz()*6;py+=(zz()-.5)*12;d+=`L${px.toFixed(1)} ${py.toFixed(1)}`}el('path',{d,fill:'none',stroke:C.nir,'stroke-width':1.2,opacity:.75},g)}
+  el('path',{d:'M128 46H186',stroke:C.signalInk,'stroke-width':1},g);el('circle',{cx:122,cy:46,r:2.5,fill:C.signalInk},g);
+  txt(g,196,30,'light scatters in the',{});txt(g,196,52,'outer layers',{});txt(g,196,76,'core: dark to the camera',{style:'fill:#C2331A'});
+  // fm3: plate with few wells filled
+  g=document.getElementById('fm3');
+  for(let rw=0;rw<3;rw++)for(let c=0;c<10;c++){const x=14+c*28,y=16+rw*30,f=(rw===1&&(c===2||c===7))||(rw===0&&c===5)||(rw===2&&c===4);
+    el('circle',{cx:x,cy:y,r:10,fill:f?'#F2B8A0':'none',stroke:f?'#C98C7A':'#BDB6A9','stroke-width':1.5,'stroke-dasharray':f?'0':'3 3'},g); if(f)el('circle',{cx:x,cy:y,r:4,fill:'#2B1D1F'},g)}
+  txt(g,316,40,'patient samples:',{});txt(g,316,64,'a few wells, once',{style:'fill:#C2331A'});
+})();
+
+/* ================= SLIDE 3: tracker rows ================= */
+(function(){
+  // [org, role/type, pain, decision, said, negative?]  — from interview notes (Nov 2026)
+  const rows=[
+    ['Dana-Farber · Center for Patient-Derived Models','Cancer center · <span class="ph">[role]</span>','Assays destroy scarce patient models','Yes · less waste','Measuring without destroying means less waste.'],
+    ['Weill Cornell · Englander Institute','Precision medicine · <span class="ph">[role]</span>','Several organoids per drug test; needs speed','Yes, if accuracy is proven','1 organoid per drug test, faster turnover; live, intact readings are more accurate — needs proof.'],
+    ['MSK · Rubenstein Center','Pancreatic organoid researchers','Dense tumors: can\'t see into the core','Yes · core access','The core is the most important part — and the hardest to measure.'],
+    ['Fakih IVF','Founder, IVF clinic','No gentle way to monitor embryos or their media','Would pay','Clinics want gentle monitoring and would pay for it. Sees future SPOT uses in IVF.'],
+    ['Goodman Lab of Immunology','Pedram Bayat · researcher','Can\'t see inside; suspension checks destroy sample','Yes · workflow','“If it existed, it would be super valuable to us.”'],
+    ['Brenner Bioengineering Lab','Saw Nwe · research assistant','None: checks viability by microscope; no lysis','No','Sounds great if it doesn\'t hurt the cells — but doesn\'t need it; microscopes are enough.',true],
+    ['CHOP Research Institute','Megan Xie · research intern, biology','Live-dead stains, flow and cell counts destroy cells','Yes · viability workflow','“…we would be able to track changes without having to sacrifice some of the cells.”'],
+    ['Penn Engineering · SPOTs','Matt Campbell · co-inventor (email)','Expert check: can a chip be read from inside?','Surface: yes · core: untested','“You would need a large-area SPOT to resolve deeper than about 100 microns into the tissue.”',false,true]
+  ];
+  const DONE=rows.length;
+  const pr=document.getElementById('prog');for(let i=0;i<25;i++){const q=document.createElement('i');if(i<DONE)q.className='on';pr.appendChild(q)}
+  const tb=document.getElementById('trk');
+  rows.forEach((r,i)=>{const tr=document.createElement('tr');if(r[5])tr.className='neg';if(r[6])tr.className='exp';
+    tr.innerHTML=`<td class="n">${String(i+1).padStart(2,'0')}</td><td><div class="org">${r[0]}</div><div>${r[1]}</div></td><td>${r[2]}</td><td class="dec">${r[3]}</td><td class="said">${r[4]}</td>`;tb.appendChild(tr)});
+  const nx=String(DONE+1).padStart(2,'0');
+  const tr=document.createElement('tr');tr.className='next';tr.innerHTML=`<td class="n">${nx}</td><td colspan="4"><span class="ph">[interviews ${nx}–25 — add a row per conversation]</span></td>`;tb.appendChild(tr);
+})();
+
+/* ================= SLIDE 4: flow + MC axes ================= */
+(function(){
+  const f=document.getElementById('flow');
+  const W=252, gap=(1728-6*W)/5;
+  const steps=[
+    ['01','Seed','A chiplet in each well, on or under the organoid.'],
+    ['02','Power','NIR panel flashes the plate; the chip harvests the light.'],
+    ['03','Sense','v1 measures impedance at the surface → viability.'],
+    ['04','Blink','The SPOT mirror blinks chip ID + reading.'],
+    ['05','Read','One camera decodes every well at once.'],
+    ['→','Output','A time series per well — nothing lysed.']
+  ];
+  const H=128;
+  steps.forEach((st,i)=>{
+    const d=document.createElement('div');d.className='st';d.style.left=(i*(W+gap))+'px';
+    d.innerHTML=`<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"></svg><div class="cap"><b><i>${st[0]}</i>&nbsp;&nbsp;${st[1].toUpperCase()}</b>${st[2]}</div>`;
+    f.appendChild(d);const g=d.querySelector('svg');
+    el('rect',{x:.5,y:.5,width:W-1,height:H-1,rx:6,fill:'#FBFAF6',stroke:C.hair},g);
+    const plate=(y0,n,lit)=>{el('rect',{x:40,y:y0,width:172,height:44,rx:4,fill:'none',stroke:C.ink,'stroke-width':1.5},g);for(let c=0;c<6;c++)for(let r=0;r<2;r++){el('circle',{cx:62+c*26,cy:y0+13+r*18,r:6,fill:lit&&lit(c,r)?'#F2B8A0':'none',stroke:C.slate,'stroke-width':1.2},g)}};
+    if(i===0){plate(72,0,(c,r)=>true);
+      for(let c=0;c<6;c++)for(let r=0;r<2;r++)el('rect',{x:62+c*26-2,y:72+13+r*18-2,width:4,height:4,fill:C.signal},g);
+      el('rect',{x:186,y:14,width:12,height:12,fill:C.signal},g);el('path',{d:'M192 32V58',stroke:C.signal,'stroke-width':1.5,'stroke-dasharray':'3 3'},g);el('path',{d:'M187 53l5 7 5-7',fill:'none',stroke:C.signal,'stroke-width':1.5},g);
+      txt(g,40,30,'chiplet',{style:'fill:#0B0F14'});txt(g,40,52,'150–300 µm',{});}
+    if(i===1){el('rect',{x:30,y:14,width:192,height:10,fill:C.ink},g);for(let k=0;k<8;k++)el('rect',{x:40+k*24,y:17,width:5,height:5,fill:C.nirL},g);
+      for(let k=0;k<7;k++)el('line',{x1:48+k*26,y1:28,x2:52+k*25,y2:68,stroke:C.nir,'stroke-width':1.5,opacity:.8},g);
+      plate(72,0,(c,r)=>true);}
+    if(i===2){const cx=W/2,cy=H/2+14;const gg=el('defs',{},g);grad(gg,'oS3','radialGradient',{cx:.5,cy:.5,r:.5,fx:.4,fy:.35},[[0,'#FBE3D6'],[.7,'#F2B8A0'],[1,'#D98B7C']]);
+      el('circle',{cx,cy,r:46,fill:'url(#oS3)'},g);drawCells(g,pack(cx,cy,0,45,4,6.5,1500,4),cx,cy,{fill:'#fff',fo:[.1,.1],stroke:'#8C4A52',so:[.15,.3],sw:.8});
+      const ky=cy-46;el('rect',{x:cx-11,y:ky-11,width:22,height:22,fill:'#141A22'},g);el('rect',{x:cx-6,y:ky-6,width:10,height:10,fill:C.signal},g);
+      el('path',{d:`M${cx+20} ${ky+8}q6 -6 12 0t12 0t12 0`,fill:'none',stroke:C.ink,'stroke-width':1.5},g);txt(g,cx+64,ky+0,'Z',{'text-anchor':'middle',style:'fill:#0B0F14;font-size:18px'});
+      el('path',{d:`M${cx-20} ${ky+8}q-6 6 -12 0t-12 0t-12 0`,fill:'none',stroke:C.ink,'stroke-width':1.5},g);}
+    if(i===3){const code=[1,0,1,1,0,1,0,0,1,1];let d='M20 46';code.forEach((b,k)=>{const x=20+k*21.2,y=b?20:46;d+=`L${x.toFixed(1)} ${y}L${(x+21.2).toFixed(1)} ${y}`});
+      el('path',{d,fill:'none',stroke:C.ink,'stroke-width':1.5},g);
+      code.forEach((b,k)=>{const x=24+k*21.2;b?el('rect',{x,y:62,width:13,height:13,fill:C.signal},g):el('rect',{x:x+.75,y:62.75,width:11.5,height:11.5,fill:'none',stroke:C.signal,'stroke-width':1.5},g)});
+      el('path',{d:'M24 86v6h84v-6M130 86v6h96v-6',fill:'none',stroke:C.slate,'stroke-width':1.2},g);
+      txt(g,66,114,'ID',{'text-anchor':'middle'});txt(g,178,114,'reading',{'text-anchor':'middle'});}
+    if(i===4){el('rect',{x:98,y:12,width:56,height:28,rx:4,fill:C.ink},g);el('circle',{cx:126,cy:40,r:8,fill:C.ink},g);el('circle',{cx:126,cy:40,r:3.5,fill:C.signal},g);
+      txt(g,14,26,'96 / 384',{});el('path',{d:'M118 48L40 86M134 48L212 86',stroke:C.slate,'stroke-width':1,'stroke-dasharray':'3 4'},g);
+      for(let c=0;c<12;c++)for(let r=0;r<3;r++)el('rect',{x:44+c*14,y:90+r*10,width:5,height:5,fill:((c*7+r*3)%5===0)?C.signal:'#C8C2B6'},g);}
+    if(i===5){['A1','A2','A3'].forEach((lb,k)=>{const y0=24+k*30;txt(g,20,y0+6,lb,{});const rr=rng(30+k);let d=`M58 ${y0}`;for(let x=58;x<=224;x+=8){d+=`L${x} ${(y0+(rr()-.5)*10 - (k===2?(x-58)*.08:0)).toFixed(1)}`}el('path',{d,fill:'none',stroke:k===2?C.signal:C.ink,'stroke-width':1.5},g)});
+      txt(g,W-12,H-10,'schematic, not data',{'text-anchor':'end',style:'fill:#5B6573;font-size:16px'});}
+    if(i<5){const a=document.createElementNS(NS,'svg');a.setAttribute('width',gap);a.setAttribute('height',20);a.style.cssText=`position:absolute;left:${W}px;top:${H/2-10}px`;el('path',{d:`M6 10H${gap-8}M${gap-14} 4l6 6-6 6`,fill:'none',stroke:C.ink,'stroke-width':1.5},a);d.appendChild(a)}
+  });
+
+  const m=document.getElementById('mc');
+  const x0=84,x1=530,y0=192,y1=68;
+  txt(m,24,32,'LIGHT BUDGET VS. DEPTH',{style:'fill:#5B6573;letter-spacing:.08em;font-weight:500'});
+  el('path',{d:`M${x0} ${y1-8}V${y0}H${x1}`,fill:'none',stroke:C.ink,'stroke-width':1.5},m);
+  [0,100,200,300,400].forEach((v,i)=>{const x=x0+i*(x1-x0)/4;el('line',{x1:x,y1:y0,x2:x,y2:y0+6,stroke:C.ink},m);txt(m,x,y0+24,String(v),{'text-anchor':'middle'});if(i)el('line',{x1:x,y1:y1-8,x2:x,y2:y0,stroke:C.hair,'stroke-dasharray':'2 4'},m)});
+  txt(m,x1,y0+24,'',{});
+  txt(m,x1-4,y0-10,'depth in tissue, µm',{'text-anchor':'end'});
+  txt(m,x0-10,y1+4,'1',{'text-anchor':'end'});txt(m,x0-10,y0+4,'0',{'text-anchor':'end'});
+  txt(m,34,(y0+y1)/2,'relative signal',{transform:`rotate(-90 34 ${(y0+y1)/2})`,'text-anchor':'middle',style:'font-size:16px;fill:#5B6573'});
+  const xm=x0+(x1-x0)/4;
+  el('line',{x1:xm,y1:y1-14,x2:xm,y2:y0,stroke:C.nir,'stroke-width':2},m);
+  txt(m,xm+8,y1-2,'~100 µm · co-inventor',{style:'fill:#B23A6B;font-weight:500'});
+  const fo=el('foreignObject',{x:xm+20,y:y1+14,width:x1-xm-36,height:72},m);
+  fo.innerHTML='<div xmlns="http://www.w3.org/1999/xhtml" class="ph block" style="height:72px;font-size:16px;line-height:1.35;background:#F6F4EF">[Monte Carlo light-budget vs. depth — data pending]</div>';
+})();
+
+/* ================= SLIDE 5: market, why-now, arrows ================= */
+(function(){
+  const s=document.getElementById('mkt');
+  const x0=300,x1=800,max=2.0,X=v=>x0+(x1-x0)*v/max;
+  [0,.5,1,1.5,2].forEach(v=>{el('line',{x1:X(v),y1:20,x2:X(v),y2:212,stroke:C.hair,'stroke-dasharray':v?'2 4':'0'},s);txt(s,X(v),240,v?('$'+v.toFixed(1)+'B'):'$0',{'text-anchor':'middle'})});
+  const lbl=(y,name,val,cagr,valCol)=>{txt(s,0,y,name,{style:'fill:#0B0F14;font-family:Inter;font-size:20px;font-weight:600'});txt(s,0,y+34,val,{style:`fill:${valCol};font-size:28px;font-weight:500`});txt(s,0,y+60,cagr,{style:'fill:#5B6573;font-size:17px'})};
+  // organoids
+  lbl(34,'Organoids','$1.2–1.9B','~16–22% CAGR','#C2331A');
+  el('rect',{x:X(0),y:30,width:X(1.2)-X(0),height:44,fill:C.ink},s);
+  { // range = vector hatch (clipped stripes; SVG <pattern> would be rasterized in the PDF)
+    const hx=X(1.2), hw=X(1.9)-X(1.2), cp=el('clipPath',{id:'hclip'},el('defs',{},s));el('rect',{x:hx,y:30,width:hw,height:44},cp);
+    el('rect',{x:hx,y:30,width:hw,height:44,fill:C.signal,'fill-opacity':.28},s);
+    const hg=el('g',{'clip-path':'url(#hclip)'},s);
+    for(let k=-50;k<hw+10;k+=11)el('line',{x1:hx+k,y1:74,x2:hx+k+44,y2:30,stroke:C.signal,'stroke-width':4},hg);
+  }
+  el('path',{d:`M${X(1.2)} 22V82M${X(1.9)} 22V82`,stroke:C.signal,'stroke-width':2},s);
+  txt(s,X(1.9),102,'range across estimates',{'text-anchor':'end',style:'fill:#C2331A'});
+  // label-free
+  lbl(136,'Label-free cell monitoring','~$720M','~11% CAGR','#0B0F14');
+  el('rect',{x:X(0),y:140,width:X(.72)-X(0),height:44,fill:C.slate},s);
+  // tags (placeholder sources)
+  const fo=el('foreignObject',{x:x0,y:86,width:300,height:28},s);fo.innerHTML='<div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;gap:10px;align-items:center"><span class="tag">analyst est. A</span><span class="ph" style="font-size:16px">[SRC]</span></div>';
+  const fo2=el('foreignObject',{x:X(.72)+16,y:149,width:300,height:28},s);fo2.innerHTML='<div xmlns="http://www.w3.org/1999/xhtml" style="display:flex;gap:10px;align-items:center"><span class="tag">analyst est. B</span><span class="ph" style="font-size:16px">[SRC]</span></div>';
+  // business model arrows
+  const a=document.getElementById('bmarrows');
+  [[468,512],[884,928]].forEach(p=>{el('path',{d:`M${p[0]+6} 598H${p[1]-8}M${p[1]-15} 591l7 7-7 7`,fill:'none',stroke:C.ink,'stroke-width':1.8},a)});
+})();
+
+/* single-slide mode for PNG export: deck.html?s=3 */
+const only=new URLSearchParams(location.search).get('s');
+if(only)document.querySelectorAll('.slide').forEach((el,i)=>{if(String(i+1)!==only)el.style.display='none'});
+</script>
+<script src="qa.js"></script>
+</body></html>

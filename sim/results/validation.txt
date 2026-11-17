@@ -1,0 +1,10 @@
+[PASS] MCML benchmark [mcml] Rd=0.09772 (ref 0.09734, err 0.39%), Tt=0.66065 (ref 0.66096, err 0.05%), N=400000
+[PASS] MCML benchmark [mbl] Rd=0.09721 (ref 0.09734, err 0.13%), Tt=0.66107 (ref 0.66096, err 0.02%), N=400000
+[PASS] Zero scattering: signal F*C MC=0.606264 analytic=0.606265 (err 0.000%); matched-index F_down MC=0.77880078 vs exp(-mua d)=0.77880078
+[PASS] Energy [mcml] r_sp+R+T+A = 0.00022+0.45968+0.45644+0.08366 = 1.00000
+[PASS] Energy [mbl] r_sp+R+T+A = 0.00022+0.46123+0.45486+0.08369 = 1.00000
+[PASS] MCML vs absorption-weighting on mismatched tissue slab: Rd differ by 0.34%
+[PASS] Chicken-skin sanity (250 um, mu_s'=2.45/mm, 780 nm, NA 0.25, 10 mW/cm2, dR 0.1): F_down=0.868, C_NA=0.0381, point-mirror r50 at surface=152 um
+    a=50 um: image r50=70 um (sharp square r50 ~20 um), m=0.011, SNR/cycle (camera)=25.9, time to SNR 5 = 0.00667 s
+    a=300 um: image r50=146 um (sharp square r50 ~120 um), m=0.0474, SNR/cycle (camera)=353, time to SNR 5 = 0.00667 s
+[INFO] Statistical errors: every production configuration is run with seeds [1, 2, 3]; results.csv reports mean and standard error across seeds.

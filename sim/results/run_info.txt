@@ -1,0 +1,32 @@
+total_seconds 142
+photons_stage1 300000
+photons_stage2 300000
+seeds [1, 2, 3]
+workers 15
+{'wavelength_nm': 850, 'musp_780': 0.3, 'seed': 1, 'seconds': 16.325479745864868, 'lost_s1': 0.0, 'lost_s2': 0.0}
+{'wavelength_nm': 780, 'musp_780': 0.3, 'seed': 1, 'seconds': 17.31231951713562, 'lost_s1': 0.0, 'lost_s2': 0.0}
+{'wavelength_nm': 635, 'musp_780': 0.3, 'seed': 1, 'seconds': 18.530999660491943, 'lost_s1': 0.0, 'lost_s2': 0.0}
+{'wavelength_nm': 850, 'musp_780': 1.0, 'seed': 1, 'seconds': 30.764006853103638, 'lost_s1': 0.0, 'lost_s2': 0.0}
+{'wavelength_nm': 780, 'musp_780': 1.0, 'seed': 1, 'seconds': 33.214064598083496, 'lost_s1': 0.0, 'lost_s2': 0.0}
+{'wavelength_nm': 780, 'musp_780': 0.3, 'seed': 2, 'seconds': 16.20599627494812, 'lost_s1': 0.0, 'lost_s2': 0.0}
+{'wavelength_nm': 850, 'musp_780': 0.3, 'seed': 2, 'seconds': 15.262174367904663, 'lost_s1': 0.0, 'lost_s2': 0.0}
+{'wavelength_nm': 635, 'musp_780': 0.3, 'seed': 2, 'seconds': 18.14496397972107, 'lost_s1': 0.0, 'lost_s2': 0.0}
+{'wavelength_nm': 850, 'musp_780': 1.0, 'seed': 2, 'seconds': 32.12643623352051, 'lost_s1': 0.0, 'lost_s2': 0.0}
+{'wavelength_nm': 780, 'musp_780': 1.0, 'seed': 2, 'seconds': 33.289422273635864, 'lost_s1': 0.0, 'lost_s2': 0.0}
+{'wavelength_nm': 635, 'musp_780': 1.0, 'seed': 1, 'seconds': 44.39014482498169, 'lost_s1': 0.0, 'lost_s2': 0.0}
+{'wavelength_nm': 635, 'musp_780': 1.0, 'seed': 2, 'seconds': 43.135404109954834, 'lost_s1': 0.0, 'lost_s2': 0.0}
+{'wavelength_nm': 635, 'musp_780': 0.3, 'seed': 3, 'seconds': 18.76722526550293, 'lost_s1': 0.0, 'lost_s2': 0.0}
+{'wavelength_nm': 850, 'musp_780': 2.0, 'seed': 1, 'seconds': 61.12948179244995, 'lost_s1': 0.0, 'lost_s2': 0.0}
+{'wavelength_nm': 780, 'musp_780': 0.3, 'seed': 3, 'seconds': 16.807037830352783, 'lost_s1': 0.0, 'lost_s2': 0.0}
+{'wavelength_nm': 850, 'musp_780': 0.3, 'seed': 3, 'seconds': 15.492492198944092, 'lost_s1': 0.0, 'lost_s2': 0.0}
+{'wavelength_nm': 850, 'musp_780': 2.0, 'seed': 2, 'seconds': 62.94271802902222, 'lost_s1': 0.0, 'lost_s2': 0.0}
+{'wavelength_nm': 850, 'musp_780': 1.0, 'seed': 3, 'seconds': 31.68159246444702, 'lost_s1': 0.0, 'lost_s2': 0.0}
+{'wavelength_nm': 780, 'musp_780': 1.0, 'seed': 3, 'seconds': 34.14222049713135, 'lost_s1': 0.0, 'lost_s2': 0.0}
+{'wavelength_nm': 780, 'musp_780': 2.0, 'seed': 1, 'seconds': 70.1298086643219, 'lost_s1': 0.0, 'lost_s2': 0.0}
+{'wavelength_nm': 780, 'musp_780': 2.0, 'seed': 2, 'seconds': 70.48877692222595, 'lost_s1': 0.0, 'lost_s2': 0.0}
+{'wavelength_nm': 635, 'musp_780': 1.0, 'seed': 3, 'seconds': 41.148255348205566, 'lost_s1': 0.0, 'lost_s2': 0.0}
+{'wavelength_nm': 850, 'musp_780': 2.0, 'seed': 3, 'seconds': 54.347326040267944, 'lost_s1': 0.0, 'lost_s2': 0.0}
+{'wavelength_nm': 635, 'musp_780': 2.0, 'seed': 1, 'seconds': 89.55636811256409, 'lost_s1': 0.0, 'lost_s2': 0.0}
+{'wavelength_nm': 635, 'musp_780': 2.0, 'seed': 2, 'seconds': 89.68331789970398, 'lost_s1': 0.0, 'lost_s2': 0.0}
+{'wavelength_nm': 780, 'musp_780': 2.0, 'seed': 3, 'seconds': 59.327470541000366, 'lost_s1': 0.0, 'lost_s2': 0.0}
+{'wavelength_nm': 635, 'musp_780': 2.0, 'seed': 3, 'seconds': 78.68847846984863, 'lost_s1': 0.0, 'lost_s2': 0.0}

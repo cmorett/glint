@@ -1,0 +1,43 @@
+/* Glint — shared brand tokens + fonts (local files, embedded into PDF by Chromium) */
+@font-face{font-family:"Space Grotesk";font-weight:400;src:url("fonts/SpaceGrotesk-Regular.ttf") format("truetype")}
+@font-face{font-family:"Space Grotesk";font-weight:500;src:url("fonts/SpaceGrotesk-Medium.ttf") format("truetype")}
+@font-face{font-family:"Space Grotesk";font-weight:600;src:url("fonts/SpaceGrotesk-SemiBold.ttf") format("truetype")}
+@font-face{font-family:"Space Grotesk";font-weight:700;src:url("fonts/SpaceGrotesk-Bold.ttf") format("truetype")}
+@font-face{font-family:"Inter";font-weight:400;src:url("fonts/Inter-Regular.ttf") format("truetype")}
+@font-face{font-family:"Inter";font-weight:500;src:url("fonts/Inter-Medium.ttf") format("truetype")}
+@font-face{font-family:"Inter";font-weight:600;src:url("fonts/Inter-SemiBold.ttf") format("truetype")}
+@font-face{font-family:"Inter";font-weight:700;src:url("fonts/Inter-Bold.ttf") format("truetype")}
+@font-face{font-family:"JetBrains Mono";font-weight:400;src:url("fonts/JetBrainsMono-Regular.ttf") format("truetype")}
+@font-face{font-family:"JetBrains Mono";font-weight:500;src:url("fonts/JetBrainsMono-Medium.ttf") format("truetype")}
+@font-face{font-family:"JetBrains Mono";font-weight:700;src:url("fonts/JetBrainsMono-Bold.ttf") format("truetype")}
+
+:root{
+  --ink:#0B0F14;
+  --ink-2:#151B23;      /* raised surface on Ink */
+  --paper:#F6F4EF;
+  --paper-2:#EFECE5;    /* recessed surface on Paper */
+  --signal:#FF4D2E;     /* 635 nm red — graphics + text on Ink */
+  --signal-ink:#C2331A; /* Signal for small text on Paper (5.0:1) */
+  --nir:#B23A6B;
+  --nir-light:#E58AB0;  /* NIR on Ink */
+  --tissue:#F2B8A0;
+  --slate:#5B6573;
+  --slate-light:#A3ACB8;/* secondary text on Ink (7.9:1) */
+  --hairline:#D9D4CA;
+  --hairline-dark:#2A323D;
+  --display:"Space Grotesk",system-ui,sans-serif;
+  --body:"Inter",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+/* Placeholder: one style everywhere. Search the source for class="ph" */
+.ph{
+  font-family:var(--mono);font-weight:500;letter-spacing:0;
+  color:#4E5866;background:rgba(91,101,115,.07);
+  border:1.5px dashed #8B95A3;border-radius:4px;
+  padding:1px 8px;white-space:nowrap;
+}
+.dark .ph,.on-ink .ph{color:#C3CAD4;background:rgba(195,202,212,.07);border-color:#6E7886}
+.ph.block{display:flex;align-items:center;justify-content:center;white-space:normal;text-align:center;padding:16px}
